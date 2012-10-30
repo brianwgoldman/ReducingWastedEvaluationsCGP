@@ -74,43 +74,6 @@ class Individual(object):
                 if choice != invalid:
                     return choice
 
-    def dag_random_gene(self, index, invalid=None):
-        '''
-        Determines a random gene value given a gene index of a full DAG.
-        If optional ``invalid`` option is used, the returned value
-        will only be ``invalid`` if the gene has no other valid values.
-
-        Parameters:
-
-        - ``index``: The gene index who's value is being set.
-        - ``invalid``: Value to avoid returning if possible
-        '''
-        node_number = index // self.node_step
-        gene_number = index % self.node_step
-        if node_number >= self.graph_length:
-            node_number = self.graph_length
-            gene_number = -1
-
-        # If it is a function gene
-        if gene_number == 0:
-            if len(self.function_list) == 1:
-                return self.function_list[0]
-            while True:
-                choice = random.choice(self.function_list)
-                if choice != invalid:
-                    return choice
-        # If you are dealing with output locations or individual initialization
-        elif gene_number < 0 or not self.genes:
-            if node_number + self.input_length == 1:
-                return -1
-            while True:
-                choice = random.randrange(-self.input_length, node_number)
-                if choice != invalid:
-                    return choice
-        # If you are resetting a connection link on an existing individual
-        else:
-            return self.valid_reconnect(node_number, invalid)
-
     def copy(self):
         '''
         Return a copy of the individual.  Note that individuals are shallow
@@ -146,39 +109,6 @@ class Individual(object):
                 # add all of the connection genes for this node
                 self.active.update(self.connections(node_index))
         self.active = sorted([acting for acting in self.active if acting >= 0])
-
-    def dag_determine_active_nodes(self):
-        '''
-        Determines which nodes are currently active and sets self.active
-        to the sorted list of active genes in DAG individuals.
-        Automatically called by gene manipulating member functions.
-        '''
-        depends_on = defaultdict(set)
-        feeds_to = defaultdict(set)
-        connected = self.genes[-self.output_length:]
-        added = set(connected)
-        # Build a bi-directional dependency tree
-        while connected:
-            working = connected.pop()
-            if working < 0:
-                continue
-            for conn in self.connections(working):
-                depends_on[working].add(conn)
-                feeds_to[conn].add(working)
-                if conn not in added:
-                    connected.append(conn)
-                added.add(conn)
-        # find the order in which to evaluate them
-        self.active = []
-        activatable = [x for x in range(-self.input_length, 0)]
-
-        while activatable:
-            working = activatable.pop()
-            for conn in feeds_to[working]:
-                depends_on[conn].remove(working)
-                if len(depends_on[conn]) == 0:
-                    activatable.append(conn)
-                    self.active.append(conn)
 
     def evaluate(self, inputs):
         '''
@@ -244,50 +174,6 @@ class Individual(object):
         mutant.determine_active_nodes()
         return mutant
 
-    def reorder(self):
-        '''
-        Return an individual who's genes have been reordered randomly without
-        changing any of the actual connection information.
-        '''
-        # Build a list of dependencies
-        depends_on = defaultdict(set)
-        feeds_to = defaultdict(set)
-        for node_index in range(self.graph_length):
-            for conn in self.connections(node_index):
-                depends_on[node_index].add(conn)
-                feeds_to[conn].add(node_index)
-        # Create a dictionary storing how to translate location information
-        new_order = {i: i for i in range(-self.input_length, 0)}
-        addable = new_order.keys()
-        counter = 0
-        while addable:
-            # Choose a node at random who's dependencies have already been met
-            working = random.choice(addable)
-            addable.remove(working)
-            # Update all dependencies now that this node has been added
-            for to_add in feeds_to[working]:
-                depends_on[to_add].remove(working)
-                if len(depends_on[to_add]) == 0:
-                    addable.append(to_add)
-                    new_order[to_add] = counter
-                    counter += 1
-
-        # Create the new individual using the new ordering
-        mutant = self.copy()
-        for node_index in range(self.graph_length):
-            start = new_order[node_index] * self.node_step
-            mutant.genes[start] = self.genes[node_index * self.node_step]
-            connections = [new_order[conn]
-                           for conn in self.connections(node_index)]
-            mutant.genes[start + 1:start + self.node_step] = connections
-        length = len(self.genes)
-        # Update the output locations
-        for index in range(length - self.output_length, length):
-            mutant.genes[index] = new_order[self.genes[index]]
-        # Have the mutant recalculate its active genes
-        mutant.determine_active_nodes()
-        return mutant
-
     def asym_phenotypic_difference(self, other):
         '''
         Determine how many genes would have to be mutated in order to make
@@ -310,53 +196,6 @@ class Individual(object):
             count += (self.genes[index] !=
                       other.genes[index])
         return count
-
-    def valid_reconnect(self, node_index, invalid=None):
-        '''
-        When using a DAG individual, find a random connection location that
-        does not depend on the current node.
-
-        Parameters:
-
-        - ``node_index``: The index of the node who's connection is being reset
-        - ``invalid``: Value to avoid returning if possible
-        '''
-        # Nodes always depend on themselves and inputs never depend on nodes
-        dependent = {node_index: True, invalid: True}
-        for index in range(-self.input_length, 0):
-            dependent[index] = False
-
-        def is_dependent(current):
-            '''
-            Internal recursive function to determine if a node index
-            is dependent on ``node_index``.  Also updates the dependency
-            dictionary.
-
-            Parameters:
-
-            - ``current``: The current working node index to be checked for
-              dependency.
-            '''
-            if current in dependent:
-                return dependent[current]
-            for conn in self.connections(current):
-                if is_dependent(conn):
-                    dependent[current] = True
-                    return True
-            dependent[current] = False
-            return False
-
-        while True:
-            # Select a random node that is not dependent on this one
-            options = [index for index in
-                       range(-self.input_length, self.graph_length)
-                       if index not in dependent or not dependent[index]]
-            # If your out of options, return the invalid value
-            if len(options) == 0:
-                return invalid
-            option = random.choice(options)
-            if not is_dependent(option):
-                return option
 
     def show_active(self):
         '''
@@ -395,8 +234,6 @@ def generate(config, output):
       for:
 
       - All configuration information required to initialize an Individual.
-      - ``dag``: If DAG based individuals should be used.
-      - ``reorder``: If the parent should be reordered before making offspring.
       - ``mutation_rate``: The probably to use for mutation.
       - ``off_size``: The number of offspring to produce per generation.
       - ``output_length``: The number of output variables.
@@ -412,18 +249,11 @@ def generate(config, output):
     '''
     output['skipped'] = 0
     output['estimated'] = 0
-    if config['dag']:
-        Individual.determine_active_nodes = \
-        Individual.dag_determine_active_nodes
-        Individual.random_gene = \
-        Individual.dag_random_gene
     if config['speed'] == 'single':
         Individual.mutate = Individual.one_active_mutation
     parent = Individual(**config)
     yield parent
     while True:
-        if config['reorder']:
-            parent = parent.reorder()
         mutants = [parent.mutate(config['mutation_rate'])
                    for _ in range(config['off_size'])]
         active = config['output_length'] + (len(parent.active) *
@@ -449,28 +279,3 @@ def generate(config, output):
         best_child = max(mutants)
         if parent <= best_child:
             parent = best_child
-
-
-def multi_indepenedent(config, output):
-    '''
-    Allows for multiple parallel independent populations to be evolved
-    at the same time.  Will generate one individual from each population
-    before repeating a population.
-
-    Parameters:
-
-    - ``config``: A dictionary containing all of the configuration information
-      required to generate multiple populations worth of individuals.  Should
-      include values for:
-
-      - All configuration information required by ``generate``.
-      - ``pop_size``: The number of parallel populations to use.
-    - ``output``:  Used to return information about evolution.  Shared by all
-      parallel populations.  Will contain all information output by
-      ``generate``.
-    '''
-    collective = itertools.izip(*[generate(config, output)
-                                  for _ in range(config['pop_size'])])
-    for next_iterations in collective:
-        for next_iteration in next_iterations:
-            yield next_iteration

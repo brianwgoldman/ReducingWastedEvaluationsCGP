@@ -23,7 +23,7 @@ output turned on, outputting the results to output/test_run.dat.
 For any support questions email brianwgoldman@acm.org.
 '''
 
-from evolution import Individual, multi_indepenedent
+from evolution import Individual, generate
 import problems
 import util
 
@@ -41,7 +41,7 @@ def one_run(evaluator, config):
       required to perform a experimental run, including:
 
       - All information required to initialize an individual.
-      - All information required to run ``evolution.multi_independent``.
+      - All information required to run ``evolution.generate``.
       - ``verbose``: Boolean value for if extra runtime information should
         be displayed.
       - ``max_evals``: The maximum number of evaluations allowed before
@@ -52,7 +52,7 @@ def one_run(evaluator, config):
     best = Individual(**config)
     last_improved = -1
     output = {}
-    for evals, individual in enumerate(multi_indepenedent(config, output)):
+    for evals, individual in enumerate(generate(config, output)):
         individual.fitness = evaluator.get_fitness(individual)
         if best < individual:
             best = individual
@@ -150,37 +150,25 @@ if __name__ == '__main__':
                         help='The number of nodes in the CGP graph')
     parser.add_argument('-m', dest='mutation_rate', type=float,
                         help='Use the specified mutation rate.')
-    parser.add_argument('-p', dest='problem', type=str,
-                        help='Use the specified problem.')
-    parser.add_argument('-pop_size', dest='pop_size', type=int,
-                        help='Use the specified population size.')
     parser.add_argument('-seed', dest='seed', type=int,
                         help='Use the specified random seed used')
     parser.add_argument('-s', dest='speed', type=str,
                         help='Specifies if evolution should should avoid' +
                         ' duplicated evaluations.  Valid settings are: ' +
                         'normal, skip, accumulate, single')
-    parser.add_argument('-r', dest='reorder', action='store_true',
-                        help='Include this flag to have mutant reordering')
-    parser.add_argument('-dag', dest='dag', action='store_true',
-                        help='Include this flag for full dag representation')
     parser.add_argument('-c', dest='output_config', type=str,
                         help='Outputs a single configuration file containing' +
                         ' the entire configuration used in this run')
     parser.add_argument('-v', dest='verbose', action='store_true',
                         help='Include this flag to increase periodic output')
-
     parser.add_argument('-o', dest='output_results', type=str,
                         help='Specify a file to output the results.')
-
     parser.add_argument('-profile', dest='profile', action='store_true',
                         help='Include this flag to run a profiler')
 
     args = parser.parse_args()
     config = util.load_configurations(args.configs)
     config['verbose'] = args.verbose
-    config['reorder'] = args.reorder
-    config['dag'] = args.dag
 
     if args.seed != None:
         config['seed'] = args.seed
@@ -193,12 +181,6 @@ if __name__ == '__main__':
 
     if args.mutation_rate != None:
         config['mutation_rate'] = args.mutation_rate
-
-    if args.problem != None:
-        config['problem'] = args.problem
-
-    if args.pop_size != None:
-        config['pop_size'] = args.pop_size
 
     if args.speed != None:
         config['speed'] = args.speed

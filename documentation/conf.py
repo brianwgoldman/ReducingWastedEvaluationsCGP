@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
-# Wasted Evaluations in Cartesian Genetic Programming documentation build configuration file, created by
-# sphinx-quickstart on Tue Oct 30 10:54:54 2012.
+# Reducing Wasted Evaluations in Cartesian Genetic Programming documentation build configuration file, created by
+# sphinx-quickstart on Tue Oct 30 16:52:45 2012.
 #
 # This file is execfile()d with the current directory set to its containing dir.
 #
@@ -17,7 +17,7 @@ sys.path.append('/home/goldman/code/')
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
-#
+#sys.path.insert(0, os.path.abspath('.'))
 
 # -- General configuration -----------------------------------------------------
 
@@ -41,7 +41,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Wasted Evaluations in Cartesian Genetic Programming'
+project = u'Reducing Wasted Evaluations in Cartesian Genetic Programming'
 copyright = u'2012, Brian W. Goldman and William Punch'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -165,7 +165,7 @@ html_static_path = ['_static']
 #html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'WastedEvaluationsinCartesianGeneticProgrammingdoc'
+htmlhelp_basename = 'ReducingWastedEvaluationsinCartesianGeneticProgrammingdoc'
 
 
 # -- Options for LaTeX output --------------------------------------------------
@@ -184,7 +184,7 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'WastedEvaluationsinCartesianGeneticProgramming.tex', u'Wasted Evaluations in Cartesian Genetic Programming Documentation',
+  ('index', 'ReducingWastedEvaluationsinCartesianGeneticProgramming.tex', u'Reducing Wasted Evaluations in Cartesian Genetic Programming Documentation',
    u'Brian W. Goldman and William Punch', 'manual'),
 ]
 
@@ -214,7 +214,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'wastedevaluationsincartesiangeneticprogramming', u'Wasted Evaluations in Cartesian Genetic Programming Documentation',
+    ('index', 'reducingwastedevaluationsincartesiangeneticprogramming', u'Reducing Wasted Evaluations in Cartesian Genetic Programming Documentation',
      [u'Brian W. Goldman and William Punch'], 1)
 ]
 
@@ -228,8 +228,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'WastedEvaluationsinCartesianGeneticProgramming', u'Wasted Evaluations in Cartesian Genetic Programming Documentation',
-   u'Brian W. Goldman and William Punch', 'WastedEvaluationsinCartesianGeneticProgramming', 'One line description of project.',
+  ('index', 'ReducingWastedEvaluationsinCartesianGeneticProgramming', u'Reducing Wasted Evaluations in Cartesian Genetic Programming Documentation',
+   u'Brian W. Goldman and William Punch', 'ReducingWastedEvaluationsinCartesianGeneticProgramming', 'One line description of project.',
    'Miscellaneous'),
 ]
 
