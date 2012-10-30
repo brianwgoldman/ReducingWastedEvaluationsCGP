@@ -1,0 +1,4 @@
+[
+[["evals", [53591.0, 0.0]], ["skipped", [18277.0, 0.0]], ["success", [1.0, 0]], ["normal", [71868.0, 0.0]], ["phenotype", [330.0, 0.0]], ["fitness", [1.0, 0.0]], ["estimated", [18317.217866314877, 0.0]]],
+{"evals": 53591, "skipped": 18277, "success": true, "normal": 71868, "phenotype": 330, "fitness": 1.0, "estimated": 18317.217866314877}
+]
