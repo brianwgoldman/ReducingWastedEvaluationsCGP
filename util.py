@@ -68,23 +68,6 @@ def save_list(filename, data, file_method=open):
         f.write(']' + os.linesep)
 
 
-def meanstd(data):
-    '''
-    Returns the mean and standard deviation of the given data.
-
-    Parameters:
-
-    - ``data``: The data to find the mean and standard deviation of.
-    '''
-    try:
-        mean = float(sum(data)) / len(data)
-        std = math.sqrt(sum([(value - mean) ** 2 for value in data])
-                        / len(data))
-        return mean, std
-    except (ZeroDivisionError, TypeError):
-        return 0, 0
-
-
 def find_median(data):
     '''
     Returns the median of the data.
@@ -112,40 +95,6 @@ def median_deviation(data, median=None):
     if median is None:
         median = find_median(data)
     return  median, find_median([abs(x - median) for x in data])
-
-
-def resample_probability(i, k, n):
-    '''
-    Given ``k`` samples from ``n`` items, what is the probability that the
-    ``ith`` best element in the original set is the best found in the sample.
-
-    Parameters:
-
-    - ``i``: The index being predicted.
-    - ``k``: The sample size being drawn.
-    - ``n``: The number of items being drawn from.
-    '''
-    n = float(n)
-    not_i = (n - 1 - i) / (n - i)
-    one_or_more_i = 1 - not_i ** k
-    not_better = (n - i) / n
-    none_better = not_better ** k
-    return one_or_more_i * none_better
-
-
-def best_of_k(data, k, minimum=False):
-    '''
-    Given a set of data, predict what the expected best result of drawing
-    ``k`` samples from the same distribution.
-
-    Parameters
-
-    - ``data``: The set of data drawn from the distribution being analyzed.
-    - ``k``: The number of samples to be drawn from the distribution.
-    - ``minimum``: Specifies if you want the worst of k instead of the best.
-    '''
-    return sum(resample_probability(i, k, len(data)) * v
-               for i, v in enumerate(sorted(data, reverse=minimum)))
 
 
 def wilcoxon_signed_rank(d1, d2):

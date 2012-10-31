@@ -50,15 +50,13 @@ def one_run(evaluator, config):
         termination.
     '''
     best = Individual(**config)
-    last_improved = -1
     output = {}
     for evals, individual in enumerate(generate(config, output)):
         individual.fitness = evaluator.get_fitness(individual)
         if best < individual:
             best = individual
-            last_improved = evals
             if config['verbose']:
-                print '\t', last_improved, best.fitness, len(best.active)
+                print '\t', evals, best.fitness, len(best.active)
         if (evals >= config['max_evals'] or
             best.fitness >= config['max_fitness']):
             break

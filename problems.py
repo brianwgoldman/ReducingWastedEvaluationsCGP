@@ -4,7 +4,6 @@ for those problems.
 '''
 import operator
 import itertools
-import random
 import math
 
 
@@ -22,56 +21,8 @@ def nor(x, y):
     return not (x or y)
 
 
-def protected(function):
-    '''
-    Decorator that ensures decorated functions always have a valid output.
-    If an exception occurs or infinity is returned, the first argument of the
-    function will be returned.
-
-    Parameters:
-
-    - ``function``: The function to be decorated.
-    '''
-    def inner(*args):
-        try:
-            value = function(*args)
-            if math.isinf(value):
-                return args[0]
-            return value
-        except (ValueError, OverflowError, ZeroDivisionError):
-            return args[0]
-    inner.__name__ = function.__name__
-    return inner
-
-
-def arity_controlled(desired):
-    '''
-    Decorator used to make functions take any number of inputs while only
-    using the first ``desired`` number of arguments.  For example, you can
-    pass 10 arguments to a function that takes only 1 if ``desired=1`` and
-    the first of the arguments will actually be used.
-
-    Parameters:
-
-    - ``desired``: The actual arity of the wrapped function.
-    '''
-    def wrap(function):
-        def inner(*args):
-            return function(*args[:desired])
-        inner.__name__ = function.__name__
-        return inner
-    return wrap
-
 # Standard lists of operators for different problems to use
 binary_operators = [operator.or_, operator.and_, nand, nor]
-regression_operators = [operator.add, operator.sub,
-                        operator.mul, operator.div]
-
-#for unary in [math.sin, math.cos, math.exp, math.log]:
-#    regression_operators.append(arity_controlled(1)(unary))
-
-# Ensures all regression operators are numerically protected
-regression_operators = [protected(op) for op in regression_operators]
 
 
 class Problem(object):
@@ -146,56 +97,13 @@ def binary_range(config):
     return itertools.product((0, 1), repeat=config['input_length'])
 
 
-def float_samples(config):
+def single_bit_set(config):
     '''
-    Returns random samples of the input space.
-
-    Parameters:
-
-    - ``config``: A dictionary containing information about the input space.
-      - ``min``: The minimum valid value in the space.
-      - ``max``: The maximum valid value in the space.
-      - ``input_length``: The number of input variables.
-      - ``samples``: The number of samples to draw.
+    Creates the list of all possible binary strings of specified length
+    with exactly one set bit.  ``config`` should specify the ``input_length``.
     '''
-    return ([random.uniform(config['min'], config['max'])
-             for _ in xrange(config['input_length'])]
-            for _ in xrange(config['samples']))
-
-
-def float_range(config):
-    '''
-    Returns a incremental range of a floating point value.  Like range() for
-    floats.
-
-    Parameters:
-
-    - ``config``: A dictionary containing information about the input space.
-      - ``min``: The minimum valid value in the space.
-      - ``max``: The maximum valid value in the space.
-      - ``step``: The distance between sample points.
-    '''
-    counter = 0
-    while True:
-        value = counter * config['step'] + config['min']
-        if value > config['max']:
-            break
-        yield value
-        counter += 1
-
-
-def n_dimensional_grid(config):
-    '''
-    Returns a multidimensional grid of points in the input space.
-
-    Parameters:
-
-    - ``config``: A dictionary containing information about the input space.
-      - All configuration information required by ``float_range``.
-      - ``input_length``: How many dimensions are in the input space.
-    '''
-    return itertools.product(float_range(config),
-                             repeat=config['input_length'])
+    return [map(int, '1'.rjust(i + 1, '0').ljust(config['input_length'], '0'))
+            for i in range(config['input_length'])]
 
 
 @problem_attributes(binary_range, binary_operators, 2)
@@ -224,34 +132,6 @@ def binary_multiply(inputs):
     return map(int, extended)
 
 
-@problem_attributes(float_samples, regression_operators, 2)
-def koza_quartic(inputs):
-    '''
-    Return the result of Koza-1 on the specified input.  Expects the input
-    as a single element list and returns a single element list.
-    '''
-    x = inputs[0]
-    return [x ** 4 + x ** 3 + x ** 2 + x]
-
-
-@problem_attributes(n_dimensional_grid, regression_operators, 2)
-def pagie(inputs):
-    '''
-    Returns the result of Pagie-1 on the specified inputs.
-    '''
-    x, y = inputs
-    return [1.0 / (1 + x ** -4) + 1.0 / (1 + y ** -4)]
-
-
-def single_bit_set(config):
-    '''
-    Creates the list of all possible binary strings of specified length
-    with exactly one set bit.  ``config`` should specify the ``input_length``.
-    '''
-    return [map(int, '1'.rjust(i + 1, '0').ljust(config['input_length'], '0'))
-            for i in range(config['input_length'])]
-
-
 @problem_attributes(single_bit_set, binary_operators, 2)
 def binary_encode(inputs):
     '''
@@ -273,25 +153,3 @@ def binary_decode(inputs):
     base = [0] * width
     base[int(combined, 2)] = 1
     return base
-
-
-@problem_attributes(binary_range, binary_operators, 2)
-def mux(inputs):
-    '''
-    Uses the first k bits as a selector for which of the remaining bits to
-    return.
-    '''
-    k = int(math.log(len(inputs), 2))
-    index = int(''.join(map(str, inputs[:k])), 2) + k
-    return [inputs[index]]
-
-
-@problem_attributes(binary_range, binary_operators, 2)
-def demux(inputs):
-    '''
-    Returns the last input bit on the output line specified by the binary
-    index encoded on all inputs except the last bit.
-    '''
-    k = int(math.log(len(inputs) - 1, 2))
-    index = int(''.join(map(str, inputs[:k])), 2) + k
-    return [inputs[index]]

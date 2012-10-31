@@ -5,8 +5,6 @@ import random
 import sys
 from copy import copy
 from util import diff_count
-import itertools
-from collections import defaultdict
 
 
 class Individual(object):
@@ -32,7 +30,6 @@ class Individual(object):
         self.graph_length = graph_length
         self.function_list = function_list
         self.output_length = output_length
-        self.genes = None
         self.genes = [self.random_gene(index) for index in
                       range(graph_length * self.node_step + output_length)]
         self.determine_active_nodes()
