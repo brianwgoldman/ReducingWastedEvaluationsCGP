@@ -66,6 +66,8 @@ def one_run(evaluator, config):
     output.update({'fitness': best.fitness, 'evals': evals,
                    'success': best.fitness >= config['max_fitness'],
                    'phenotype': len(best.active),
+                   # When running 'Skip' this will correctly give the number
+                   # of evaluations required by 'Normal'.  Otherwise its junk.
                    'normal': output['skipped'] + evals})
     return output
 

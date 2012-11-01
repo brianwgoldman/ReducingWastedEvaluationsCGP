@@ -42,7 +42,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Reducing Wasted Evaluations in Cartesian Genetic Programming'
-copyright = u'2012, Brian W. Goldman and William Punch'
+copyright = u'2012, Brian W. Goldman'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -185,7 +185,7 @@ latex_elements = {
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
   ('index', 'ReducingWastedEvaluationsinCartesianGeneticProgramming.tex', u'Reducing Wasted Evaluations in Cartesian Genetic Programming Documentation',
-   u'Brian W. Goldman and William Punch', 'manual'),
+   u'Brian W. Goldman', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -215,7 +215,7 @@ latex_documents = [
 # (source start file, name, description, authors, manual section).
 man_pages = [
     ('index', 'reducingwastedevaluationsincartesiangeneticprogramming', u'Reducing Wasted Evaluations in Cartesian Genetic Programming Documentation',
-     [u'Brian W. Goldman and William Punch'], 1)
+     [u'Brian W. Goldman'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -229,7 +229,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
   ('index', 'ReducingWastedEvaluationsinCartesianGeneticProgramming', u'Reducing Wasted Evaluations in Cartesian Genetic Programming Documentation',
-   u'Brian W. Goldman and William Punch', 'ReducingWastedEvaluationsinCartesianGeneticProgramming', 'One line description of project.',
+   u'Brian W. Goldman', 'ReducingWastedEvaluationsinCartesianGeneticProgramming', 'One line description of project.',
    'Miscellaneous'),
 ]
 

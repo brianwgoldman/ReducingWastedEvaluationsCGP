@@ -1,4 +1,4 @@
-Copyright (c) 2012, Brian W. Goldman and William Punch
+Copyright (c) 2012, Brian W. Goldman
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
