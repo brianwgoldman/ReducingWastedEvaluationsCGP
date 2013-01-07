@@ -125,39 +125,6 @@
                 <span class="k">if</span> <span class="n">choice</span> <span class="o">!=</span> <span class="n">invalid</span><span class="p">:</span>
                     <span class="k">return</span> <span class="n">choice</span>
 </div>
-<div class="viewcode-block" id="Individual.shift_random_gene"><a class="viewcode-back" href="../../cgp.html#cgp.evolution.Individual.shift_random_gene">[docs]</a>    <span class="k">def</span> <span class="nf">shift_random_gene</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">invalid</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="n">node_number</span> <span class="o">=</span> <span class="n">index</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_step</span>
-        <span class="n">gene_number</span> <span class="o">=</span> <span class="n">index</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_step</span>
-        <span class="c"># If the gene is used to specify output locations</span>
-        <span class="k">if</span> <span class="n">node_number</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph_length</span><span class="p">:</span>
-            <span class="n">node_number</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph_length</span>
-            <span class="n">gene_number</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
-        <span class="c"># If the gene controls the function of a node</span>
-        <span class="k">if</span> <span class="n">gene_number</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">function_list</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">function_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-                <span class="n">choice</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">function_list</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">choice</span> <span class="o">!=</span> <span class="n">invalid</span><span class="p">:</span>
-                    <span class="k">return</span> <span class="n">choice</span>
-        <span class="c"># If the gene controls a connection / output location</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">node_number</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_length</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
-            <span class="n">direction</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
-            <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-                <span class="n">choice</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">input_length</span><span class="p">,</span> <span class="n">node_number</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">choice</span> <span class="o">!=</span> <span class="n">invalid</span><span class="p">:</span>
-                    <span class="k">return</span> <span class="n">choice</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">new_index</span> <span class="o">=</span> <span class="n">invalid</span>
-            <span class="k">while</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">input_length</span> <span class="o">&lt;=</span> <span class="n">new_index</span> <span class="o">+</span> <span class="n">direction</span> <span class="o">&lt;</span> <span class="n">node_number</span><span class="p">:</span>
-                <span class="n">new_index</span> <span class="o">+=</span> <span class="n">direction</span>
-                <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">:</span>
-                    <span class="k">break</span>
-            <span class="c">#print new_index, node_number</span>
-            <span class="k">return</span> <span class="n">new_index</span>
-</div>
 <div class="viewcode-block" id="Individual.dag_random_gene"><a class="viewcode-back" href="../../cgp.html#cgp.evolution.Individual.dag_random_gene">[docs]</a>    <span class="k">def</span> <span class="nf">dag_random_gene</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">invalid</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Determines a random gene value given a gene index of a full DAG.</span>
@@ -264,35 +231,6 @@
                     <span class="n">activatable</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">conn</span><span class="p">)</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">active</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">conn</span><span class="p">)</span>
 </div>
-<div class="viewcode-block" id="Individual.all_active"><a class="viewcode-back" href="../../cgp.html#cgp.evolution.Individual.all_active">[docs]</a>    <span class="k">def</span> <span class="nf">all_active</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">active</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">graph_length</span><span class="p">)</span>
-</div>
-<div class="viewcode-block" id="Individual.record_node_depths"><a class="viewcode-back" href="../../cgp.html#cgp.evolution.Individual.record_node_depths">[docs]</a>    <span class="k">def</span> <span class="nf">record_node_depths</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frequencies</span><span class="p">):</span>
-        <span class="n">depths</span> <span class="o">=</span> <span class="p">{</span><span class="n">input_index</span><span class="p">:</span> <span class="nb">set</span><span class="p">()</span>
-                  <span class="k">for</span> <span class="n">input_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">input_length</span><span class="p">,</span> <span class="mi">0</span><span class="p">)}</span>
-
-        <span class="k">def</span> <span class="nf">get_depths</span><span class="p">(</span><span class="n">node_index</span><span class="p">):</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">depths</span><span class="p">[</span><span class="n">node_index</span><span class="p">]</span>
-            <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-                <span class="k">pass</span>
-            <span class="n">minimum</span><span class="p">,</span> <span class="n">maximum</span><span class="p">,</span> <span class="n">total</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph_length</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">set</span><span class="p">([</span><span class="n">node_index</span><span class="p">])</span>
-            <span class="k">for</span> <span class="n">conn</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">connections</span><span class="p">(</span><span class="n">node_index</span><span class="p">):</span>
-                <span class="n">conn_total</span> <span class="o">=</span> <span class="n">get_depths</span><span class="p">(</span><span class="n">conn</span><span class="p">)</span>
-                <span class="n">minimum</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">conn_total</span><span class="p">),</span> <span class="n">minimum</span><span class="p">)</span>
-                <span class="n">maximum</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">conn_total</span><span class="p">),</span> <span class="n">maximum</span><span class="p">)</span>
-                <span class="n">total</span> <span class="o">|=</span> <span class="n">conn_total</span>
-            <span class="n">depths</span><span class="p">[</span><span class="n">node_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">total</span>
-            <span class="n">frequencies</span><span class="p">[</span><span class="s">&#39;depth_min&#39;</span><span class="p">][</span><span class="n">minimum</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="n">frequencies</span><span class="p">[</span><span class="s">&#39;depth_max&#39;</span><span class="p">][</span><span class="n">maximum</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="n">frequencies</span><span class="p">[</span><span class="s">&#39;depth_disparity&#39;</span><span class="p">][</span><span class="n">maximum</span> <span class="o">-</span> <span class="n">minimum</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="n">frequencies</span><span class="p">[</span><span class="s">&#39;depth_total&#39;</span><span class="p">][</span><span class="nb">len</span><span class="p">(</span><span class="n">total</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="k">return</span> <span class="n">total</span>
-
-        <span class="c"># Loops through all possible indices to ensure all get set.</span>
-        <span class="k">for</span> <span class="n">node_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">graph_length</span><span class="p">):</span>
-            <span class="n">get_depths</span><span class="p">(</span><span class="n">node_index</span><span class="p">)</span>
-</div>
 <div class="viewcode-block" id="Individual.evaluate"><a class="viewcode-back" href="../../cgp.html#cgp.evolution.Individual.evaluate">[docs]</a>    <span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Given a list of inputs, return a list of outputs from executing</span>
@@ -377,14 +315,13 @@
             <span class="c"># Choose a node at random who&#39;s dependencies have already been met</span>
             <span class="n">working</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">addable</span><span class="p">)</span>
             <span class="n">addable</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">working</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">working</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">new_order</span><span class="p">[</span><span class="n">working</span><span class="p">]</span> <span class="o">=</span> <span class="n">counter</span>
-                <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="c"># Update all dependencies now that this node has been added</span>
             <span class="k">for</span> <span class="n">to_add</span> <span class="ow">in</span> <span class="n">feeds_to</span><span class="p">[</span><span class="n">working</span><span class="p">]:</span>
                 <span class="n">depends_on</span><span class="p">[</span><span class="n">to_add</span><span class="p">]</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">working</span><span class="p">)</span>
                 <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">depends_on</span><span class="p">[</span><span class="n">to_add</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                     <span class="n">addable</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">to_add</span><span class="p">)</span>
+                    <span class="n">new_order</span><span class="p">[</span><span class="n">to_add</span><span class="p">]</span> <span class="o">=</span> <span class="n">counter</span>
+                    <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
 
         <span class="c"># Create the new individual using the new ordering</span>
         <span class="n">mutant</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -436,9 +373,7 @@
 <span class="sd">        - ``invalid``: Value to avoid returning if possible</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="c"># Nodes always depend on themselves and inputs never depend on nodes</span>
-        <span class="n">dependent</span> <span class="o">=</span> <span class="p">{</span><span class="n">node_index</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span> <span class="n">invalid</span><span class="p">:</span> <span class="bp">False</span><span class="p">}</span>
-        <span class="k">for</span> <span class="n">conn</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">connections</span><span class="p">(</span><span class="n">node_index</span><span class="p">):</span>
-            <span class="n">dependent</span><span class="p">[</span><span class="n">conn</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">dependent</span> <span class="o">=</span> <span class="p">{</span><span class="n">node_index</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span> <span class="n">invalid</span><span class="p">:</span> <span class="bp">True</span><span class="p">}</span>
         <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">input_length</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span>
             <span class="n">dependent</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
 
@@ -461,15 +396,18 @@
                     <span class="k">return</span> <span class="bp">True</span>
             <span class="n">dependent</span><span class="p">[</span><span class="n">current</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
             <span class="k">return</span> <span class="bp">False</span>
-        <span class="n">options</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">input_length</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph_length</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">options</span><span class="p">)):</span>
-            <span class="n">swapdown</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">options</span><span class="p">))</span>
-            <span class="n">options</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="n">options</span><span class="p">[</span><span class="n">swapdown</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="n">swapdown</span><span class="p">],</span>
-                                                 <span class="n">options</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
-            <span class="n">option</span> <span class="o">=</span> <span class="n">options</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
-            <span class="k">if</span> <span class="n">option</span> <span class="o">!=</span> <span class="n">invalid</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_dependent</span><span class="p">(</span><span class="n">option</span><span class="p">):</span>
+
+        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="c"># Select a random node that is not dependent on this one</span>
+            <span class="n">options</span> <span class="o">=</span> <span class="p">[</span><span class="n">index</span> <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span>
+                       <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">input_length</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph_length</span><span class="p">)</span>
+                       <span class="k">if</span> <span class="n">index</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">dependent</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">dependent</span><span class="p">[</span><span class="n">index</span><span class="p">]]</span>
+            <span class="c"># If your out of options, return the invalid value</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">options</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">invalid</span>
+            <span class="n">option</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">is_dependent</span><span class="p">(</span><span class="n">option</span><span class="p">):</span>
                 <span class="k">return</span> <span class="n">option</span>
-        <span class="k">return</span> <span class="n">invalid</span>
 </div>
 <div class="viewcode-block" id="Individual.show_active"><a class="viewcode-back" href="../../cgp.html#cgp.evolution.Individual.show_active">[docs]</a>    <span class="k">def</span> <span class="nf">show_active</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
@@ -482,29 +420,20 @@
             <span class="k">print</span> <span class="bp">self</span><span class="o">.</span><span class="n">connections</span><span class="p">(</span><span class="n">node_index</span><span class="p">)</span>
         <span class="k">print</span> <span class="bp">self</span><span class="o">.</span><span class="n">genes</span><span class="p">[</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">output_length</span><span class="p">:]</span>
 </div>
-<div class="viewcode-block" id="Individual.get_fitness"><a class="viewcode-back" href="../../cgp.html#cgp.evolution.Individual.get_fitness">[docs]</a>    <span class="k">def</span> <span class="nf">get_fitness</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fitness</span>
-</div>
-<div class="viewcode-block" id="Individual.more_active"><a class="viewcode-back" href="../../cgp.html#cgp.evolution.Individual.more_active">[docs]</a>    <span class="k">def</span> <span class="nf">more_active</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fitness</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">active</span><span class="p">))</span>
-</div>
-<div class="viewcode-block" id="Individual.less_active"><a class="viewcode-back" href="../../cgp.html#cgp.evolution.Individual.less_active">[docs]</a>    <span class="k">def</span> <span class="nf">less_active</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fitness</span><span class="p">,</span> <span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">active</span><span class="p">))</span>
-</div>
     <span class="k">def</span> <span class="nf">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Returns the result of self.fitness &lt; other.fitness.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_fitness</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">other</span><span class="o">.</span><span class="n">get_fitness</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fitness</span> <span class="o">&lt;</span> <span class="n">other</span><span class="o">.</span><span class="n">fitness</span>
 
     <span class="k">def</span> <span class="nf">__le__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Returns the result of self.fitness &lt;= other.fitness.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_fitness</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">other</span><span class="o">.</span><span class="n">get_fitness</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fitness</span> <span class="o">&lt;=</span> <span class="n">other</span><span class="o">.</span><span class="n">fitness</span>
 
 </div>
-<div class="viewcode-block" id="generate"><a class="viewcode-back" href="../../cgp.html#cgp.evolution.generate">[docs]</a><span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">frequencies</span><span class="p">):</span>
+<div class="viewcode-block" id="generate"><a class="viewcode-back" href="../../cgp.html#cgp.evolution.generate">[docs]</a><span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    An ``Individual`` generator that will yield a never ending supply of</span>
 <span class="sd">    ``Individual`` objects that need to have their fitness set before the</span>
@@ -518,14 +447,15 @@
 
 <span class="sd">      - All configuration information required to initialize an Individual.</span>
 <span class="sd">      - ``dag``: If DAG based individuals should be used.</span>
+<span class="sd">      - ``one_active_mutation``: If the ``Single`` mutation method is used.</span>
 <span class="sd">      - ``reorder``: If the parent should be reordered before making offspring.</span>
 <span class="sd">      - ``mutation_rate``: The probably to use for mutation.</span>
 <span class="sd">      - ``off_size``: The number of offspring to produce per generation.</span>
 <span class="sd">      - ``output_length``: The number of output variables.</span>
 <span class="sd">      - ``max_arity``: The maximum arity used by any function.</span>
-<span class="sd">      - ``speed``: String specifying the way to handle duplicate</span>
-<span class="sd">        individual creation, either ``normal&#39;&#39;, ``skip&#39;&#39;, ``accumulate``, or</span>
-<span class="sd">        ``single``.</span>
+<span class="sd">      - ``speed``: String value of ``normal&#39;&#39;, ``no_reeval&#39;&#39;, or</span>
+<span class="sd">        ``mutate_until_change`` specifying if ``Normal&#39;&#39;, ``Skip&#39;&#39;, or</span>
+<span class="sd">        ``Accumulate`` should be used, respectively.</span>
 <span class="sd">    - ``output``: Dictionary used to return information about evolution, will</span>
 <span class="sd">      send out:</span>
 
@@ -539,14 +469,8 @@
         <span class="n">Individual</span><span class="o">.</span><span class="n">dag_determine_active_nodes</span>
         <span class="n">Individual</span><span class="o">.</span><span class="n">random_gene</span> <span class="o">=</span> \
         <span class="n">Individual</span><span class="o">.</span><span class="n">dag_random_gene</span>
-    <span class="k">if</span> <span class="n">config</span><span class="p">[</span><span class="s">&#39;speed&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;single&#39;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">config</span><span class="p">[</span><span class="s">&#39;one_active_mutation&#39;</span><span class="p">]:</span>
         <span class="n">Individual</span><span class="o">.</span><span class="n">mutate</span> <span class="o">=</span> <span class="n">Individual</span><span class="o">.</span><span class="n">one_active_mutation</span>
-    <span class="k">if</span> <span class="n">config</span><span class="p">[</span><span class="s">&#39;active_push&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;more&#39;</span><span class="p">:</span>
-        <span class="n">Individual</span><span class="o">.</span><span class="n">get_fitness</span> <span class="o">=</span> <span class="n">Individual</span><span class="o">.</span><span class="n">more_active</span>
-    <span class="k">elif</span> <span class="n">config</span><span class="p">[</span><span class="s">&#39;active_push&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;less&#39;</span><span class="p">:</span>
-        <span class="n">Individual</span><span class="o">.</span><span class="n">get_fitness</span> <span class="o">=</span> <span class="n">Individual</span><span class="o">.</span><span class="n">less_active</span>
-    <span class="k">if</span> <span class="n">config</span><span class="p">[</span><span class="s">&#39;problem&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;Flat&#39;</span><span class="p">:</span>
-        <span class="n">Individual</span><span class="o">.</span><span class="n">determine_active_nodes</span> <span class="o">=</span> <span class="n">Individual</span><span class="o">.</span><span class="n">all_active</span>
     <span class="n">parent</span> <span class="o">=</span> <span class="n">Individual</span><span class="p">(</span><span class="o">**</span><span class="n">config</span><span class="p">)</span>
     <span class="k">yield</span> <span class="n">parent</span>
     <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
@@ -559,22 +483,19 @@
         <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">mutant</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">mutants</span><span class="p">):</span>
             <span class="n">output</span><span class="p">[</span><span class="s">&#39;estimated&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">config</span><span class="p">[</span><span class="s">&#39;mutation_rate&#39;</span><span class="p">])</span> <span class="o">**</span> <span class="n">active</span>
             <span class="n">prev</span> <span class="o">=</span> <span class="n">mutant</span>
-            <span class="k">if</span> <span class="n">config</span><span class="p">[</span><span class="s">&#39;speed&#39;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;normal&#39;</span><span class="p">,</span> <span class="s">&#39;single&#39;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">config</span><span class="p">[</span><span class="s">&#39;speed&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s">&#39;normal&#39;</span><span class="p">:</span>
                 <span class="n">change</span> <span class="o">=</span> <span class="n">parent</span><span class="o">.</span><span class="n">asym_phenotypic_difference</span><span class="p">(</span><span class="n">mutant</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">change</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                     <span class="n">output</span><span class="p">[</span><span class="s">&#39;skipped&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-                    <span class="k">if</span> <span class="n">config</span><span class="p">[</span><span class="s">&#39;speed&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;skip&#39;</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">config</span><span class="p">[</span><span class="s">&#39;speed&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;no_reeval&#39;</span><span class="p">:</span>
                         <span class="k">continue</span>
-                    <span class="k">if</span> <span class="n">config</span><span class="p">[</span><span class="s">&#39;speed&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;accumulate&#39;</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">config</span><span class="p">[</span><span class="s">&#39;speed&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;mutate_until_change&#39;</span><span class="p">:</span>
                         <span class="k">while</span> <span class="n">change</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                             <span class="n">prev</span> <span class="o">=</span> <span class="n">mutant</span>
                             <span class="n">mutant</span> <span class="o">=</span> <span class="n">prev</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s">&#39;mutation_rate&#39;</span><span class="p">])</span>
                             <span class="n">change</span> <span class="o">=</span> <span class="n">parent</span><span class="o">.</span><span class="n">asym_phenotypic_difference</span><span class="p">(</span><span class="n">mutant</span><span class="p">)</span>
-            <span class="k">if</span> <span class="s">&#39;frequency_results&#39;</span> <span class="ow">in</span> <span class="n">config</span><span class="p">:</span>
-                <span class="n">frequencies</span><span class="p">[</span><span class="s">&#39;length_frequencies&#39;</span><span class="p">][</span><span class="nb">len</span><span class="p">(</span><span class="n">mutant</span><span class="o">.</span><span class="n">active</span><span class="p">)]</span> <span class="o">+=</span> <span class="mi">1</span>
-                <span class="c">#mutant.record_node_depths(frequencies)</span>
             <span class="k">yield</span> <span class="n">mutant</span>
-            <span class="k">if</span> <span class="n">config</span><span class="p">[</span><span class="s">&#39;speed&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;accumulate&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">config</span><span class="p">[</span><span class="s">&#39;speed&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;mutate_until_change&#39;</span><span class="p">:</span>
                 <span class="c"># If the mutant is strickly worse, use the last equivalent</span>
                 <span class="n">mutants</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">prev</span> <span class="k">if</span> <span class="n">mutant</span> <span class="o">&lt;</span> <span class="n">parent</span> <span class="k">else</span> <span class="n">mutant</span>
         <span class="n">best_child</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">mutants</span><span class="p">)</span>
@@ -582,7 +503,7 @@
             <span class="n">parent</span> <span class="o">=</span> <span class="n">best_child</span>
 
 </div>
-<div class="viewcode-block" id="multi_indepenedent"><a class="viewcode-back" href="../../cgp.html#cgp.evolution.multi_indepenedent">[docs]</a><span class="k">def</span> <span class="nf">multi_indepenedent</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">frequencies</span><span class="p">):</span>
+<div class="viewcode-block" id="multi_indepenedent"><a class="viewcode-back" href="../../cgp.html#cgp.evolution.multi_indepenedent">[docs]</a><span class="k">def</span> <span class="nf">multi_indepenedent</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Allows for multiple parallel independent populations to be evolved</span>
 <span class="sd">    at the same time.  Will generate one individual from each population</span>
@@ -600,7 +521,7 @@
 <span class="sd">      parallel populations.  Will contain all information output by</span>
 <span class="sd">      ``generate``.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
-    <span class="n">collective</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">izip</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">generate</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">frequencies</span><span class="p">)</span>
+    <span class="n">collective</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">izip</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">generate</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
                                   <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s">&#39;pop_size&#39;</span><span class="p">])])</span>
     <span class="k">for</span> <span class="n">next_iterations</span> <span class="ow">in</span> <span class="n">collective</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">next_iteration</span> <span class="ow">in</span> <span class="n">next_iterations</span><span class="p">:</span>

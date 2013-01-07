@@ -62,11 +62,6 @@
 <p>An individual object used to combine gene fitness with genomes, as
 well methods for manipulating those genomes.</p>
 <dl class="method">
-<dt id="cgp.evolution.Individual.all_active">
-<tt class="descname">all_active</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/cgp/evolution.html#Individual.all_active"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.evolution.Individual.all_active" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
 <dt id="cgp.evolution.Individual.asym_phenotypic_difference">
 <tt class="descname">asym_phenotypic_difference</tt><big>(</big><em>other</em><big>)</big><a class="reference internal" href="_modules/cgp/evolution.html#Individual.asym_phenotypic_difference"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.evolution.Individual.asym_phenotypic_difference" title="Permalink to this definition">¶</a></dt>
 <dd><p>Determine how many genes would have to be mutated in order to make
@@ -96,27 +91,6 @@ copied except for their list of genes.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="cgp.evolution.Individual.dag_determine_active_nodes">
-<tt class="descname">dag_determine_active_nodes</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/cgp/evolution.html#Individual.dag_determine_active_nodes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.evolution.Individual.dag_determine_active_nodes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Determines which nodes are currently active and sets self.active
-to the sorted list of active genes in DAG individuals.
-Automatically called by gene manipulating member functions.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="cgp.evolution.Individual.dag_random_gene">
-<tt class="descname">dag_random_gene</tt><big>(</big><em>index</em>, <em>invalid=None</em><big>)</big><a class="reference internal" href="_modules/cgp/evolution.html#Individual.dag_random_gene"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.evolution.Individual.dag_random_gene" title="Permalink to this definition">¶</a></dt>
-<dd><p>Determines a random gene value given a gene index of a full DAG.
-If optional <tt class="docutils literal"><span class="pre">invalid</span></tt> option is used, the returned value
-will only be <tt class="docutils literal"><span class="pre">invalid</span></tt> if the gene has no other valid values.</p>
-<p>Parameters:</p>
-<ul class="simple">
-<li><tt class="docutils literal"><span class="pre">index</span></tt>: The gene index who&#8217;s value is being set.</li>
-<li><tt class="docutils literal"><span class="pre">invalid</span></tt>: Value to avoid returning if possible</li>
-</ul>
-</dd></dl>
-
-<dl class="method">
 <dt id="cgp.evolution.Individual.determine_active_nodes">
 <tt class="descname">determine_active_nodes</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/cgp/evolution.html#Individual.determine_active_nodes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.evolution.Individual.determine_active_nodes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Determines which nodes are currently active and sets self.active
@@ -134,21 +108,6 @@ this individual.</p>
 <li><tt class="docutils literal"><span class="pre">inputs</span></tt>: The list of input values for the individual to process.</li>
 </ul>
 </dd></dl>
-
-<dl class="method">
-<dt id="cgp.evolution.Individual.get_fitness">
-<tt class="descname">get_fitness</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/cgp/evolution.html#Individual.get_fitness"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.evolution.Individual.get_fitness" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="cgp.evolution.Individual.less_active">
-<tt class="descname">less_active</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/cgp/evolution.html#Individual.less_active"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.evolution.Individual.less_active" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="cgp.evolution.Individual.more_active">
-<tt class="descname">more_active</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/cgp/evolution.html#Individual.more_active"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.evolution.Individual.more_active" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="method">
 <dt id="cgp.evolution.Individual.mutate">
@@ -182,46 +141,17 @@ if the gene has no other valid values.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="cgp.evolution.Individual.record_node_depths">
-<tt class="descname">record_node_depths</tt><big>(</big><em>frequencies</em><big>)</big><a class="reference internal" href="_modules/cgp/evolution.html#Individual.record_node_depths"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.evolution.Individual.record_node_depths" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="cgp.evolution.Individual.reorder">
-<tt class="descname">reorder</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/cgp/evolution.html#Individual.reorder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.evolution.Individual.reorder" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return an individual who&#8217;s genes have been reordered randomly without
-changing any of the actual connection information.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="cgp.evolution.Individual.shift_random_gene">
-<tt class="descname">shift_random_gene</tt><big>(</big><em>index</em>, <em>invalid=None</em><big>)</big><a class="reference internal" href="_modules/cgp/evolution.html#Individual.shift_random_gene"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.evolution.Individual.shift_random_gene" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
 <dt id="cgp.evolution.Individual.show_active">
 <tt class="descname">show_active</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/cgp/evolution.html#Individual.show_active"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.evolution.Individual.show_active" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prints the active portions of the individual in a somewhat readable
 way.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="cgp.evolution.Individual.valid_reconnect">
-<tt class="descname">valid_reconnect</tt><big>(</big><em>node_index</em>, <em>invalid=None</em><big>)</big><a class="reference internal" href="_modules/cgp/evolution.html#Individual.valid_reconnect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.evolution.Individual.valid_reconnect" title="Permalink to this definition">¶</a></dt>
-<dd><p>When using a DAG individual, find a random connection location that
-does not depend on the current node.</p>
-<p>Parameters:</p>
-<ul class="simple">
-<li><tt class="docutils literal"><span class="pre">node_index</span></tt>: The index of the node who&#8217;s connection is being reset</li>
-<li><tt class="docutils literal"><span class="pre">invalid</span></tt>: Value to avoid returning if possible</li>
-</ul>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="function">
 <dt id="cgp.evolution.generate">
-<tt class="descclassname">cgp.evolution.</tt><tt class="descname">generate</tt><big>(</big><em>config</em>, <em>output</em>, <em>frequencies</em><big>)</big><a class="reference internal" href="_modules/cgp/evolution.html#generate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.evolution.generate" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">cgp.evolution.</tt><tt class="descname">generate</tt><big>(</big><em>config</em>, <em>output</em><big>)</big><a class="reference internal" href="_modules/cgp/evolution.html#generate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.evolution.generate" title="Permalink to this definition">¶</a></dt>
 <dd><p>An <tt class="docutils literal"><span class="pre">Individual</span></tt> generator that will yield a never ending supply of
 <tt class="docutils literal"><span class="pre">Individual</span></tt> objects that need to have their fitness set before the
 next <tt class="docutils literal"><span class="pre">Individual</span></tt> can be yielded.</p>
@@ -231,8 +161,6 @@ next <tt class="docutils literal"><span class="pre">Individual</span></tt> can b
 required to generate initial individuals.  Should include values
 for:<ul>
 <li>All configuration information required to initialize an Individual.</li>
-<li><tt class="docutils literal"><span class="pre">dag</span></tt>: If DAG based individuals should be used.</li>
-<li><tt class="docutils literal"><span class="pre">reorder</span></tt>: If the parent should be reordered before making offspring.</li>
 <li><tt class="docutils literal"><span class="pre">mutation_rate</span></tt>: The probably to use for mutation.</li>
 <li><tt class="docutils literal"><span class="pre">off_size</span></tt>: The number of offspring to produce per generation.</li>
 <li><tt class="docutils literal"><span class="pre">output_length</span></tt>: The number of output variables.</li>
@@ -248,27 +176,6 @@ send out:<ul>
 <li><tt class="docutils literal"><span class="pre">estimated</span></tt>: The estimated number of individuals that are skippable.</li>
 </ul>
 </li>
-</ul>
-</dd></dl>
-
-<dl class="function">
-<dt id="cgp.evolution.multi_indepenedent">
-<tt class="descclassname">cgp.evolution.</tt><tt class="descname">multi_indepenedent</tt><big>(</big><em>config</em>, <em>output</em>, <em>frequencies</em><big>)</big><a class="reference internal" href="_modules/cgp/evolution.html#multi_indepenedent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.evolution.multi_indepenedent" title="Permalink to this definition">¶</a></dt>
-<dd><p>Allows for multiple parallel independent populations to be evolved
-at the same time.  Will generate one individual from each population
-before repeating a population.</p>
-<p>Parameters:</p>
-<ul class="simple">
-<li><tt class="docutils literal"><span class="pre">config</span></tt>: A dictionary containing all of the configuration information
-required to generate multiple populations worth of individuals.  Should
-include values for:<ul>
-<li>All configuration information required by <tt class="docutils literal"><span class="pre">generate</span></tt>.</li>
-<li><tt class="docutils literal"><span class="pre">pop_size</span></tt>: The number of parallel populations to use.</li>
-</ul>
-</li>
-<li><tt class="docutils literal"><span class="pre">output</span></tt>:  Used to return information about evolution.  Shared by all
-parallel populations.  Will contain all information output by
-<tt class="docutils literal"><span class="pre">generate</span></tt>.</li>
 </ul>
 </dd></dl>
 
@@ -327,7 +234,7 @@ deviation.</p>
 
 <dl class="function">
 <dt id="cgp.main.one_run">
-<tt class="descclassname">cgp.main.</tt><tt class="descname">one_run</tt><big>(</big><em>evaluator</em>, <em>config</em>, <em>frequencies</em><big>)</big><a class="reference internal" href="_modules/cgp/main.html#one_run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.main.one_run" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">cgp.main.</tt><tt class="descname">one_run</tt><big>(</big><em>evaluator</em>, <em>config</em><big>)</big><a class="reference internal" href="_modules/cgp/main.html#one_run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.main.one_run" title="Permalink to this definition">¶</a></dt>
 <dd><p>Performs a single run of the given configuration.  Returns a dictionary
 containing results.</p>
 <p>Parameters:</p>
@@ -337,7 +244,7 @@ individual and returns its fitness value</li>
 <li><tt class="docutils literal"><span class="pre">config</span></tt>: A dictionary containing all of the configuration information
 required to perform a experimental run, including:<ul>
 <li>All information required to initialize an individual.</li>
-<li>All information required to run <tt class="docutils literal"><span class="pre">evolution.multi_independent</span></tt>.</li>
+<li>All information required to run <tt class="docutils literal"><span class="pre">evolution.generate</span></tt>.</li>
 <li><tt class="docutils literal"><span class="pre">verbose</span></tt>: Boolean value for if extra runtime information should
 be displayed.</li>
 <li><tt class="docutils literal"><span class="pre">max_evals</span></tt>: The maximum number of evaluations allowed before
@@ -348,11 +255,6 @@ termination.</li>
 </li>
 </ul>
 </dd></dl>
-
-<dl class="function">
-<dt id="cgp.main.process_frequencies">
-<tt class="descclassname">cgp.main.</tt><tt class="descname">process_frequencies</tt><big>(</big><em>config</em>, <em>frequencies</em><big>)</big><a class="reference internal" href="_modules/cgp/main.html#process_frequencies"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.main.process_frequencies" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 </div>
 <div class="section" id="module-cgp.plotter">
@@ -371,110 +273,14 @@ python 2.7 instead.</p>
 <p>Defines each of the benchmark problems used as well as the function sets
 for those problems.</p>
 <dl class="class">
-<dt id="cgp.problems.Active">
-<em class="property">class </em><tt class="descclassname">cgp.problems.</tt><tt class="descname">Active</tt><big>(</big><em>config</em><big>)</big><a class="reference internal" href="_modules/cgp/problems.html#Active"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.problems.Active" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cgp.problems.Problem" title="cgp.problems.Problem"><tt class="xref py py-class docutils literal"><span class="pre">cgp.problems.Problem</span></tt></a></p>
-<dl class="method">
-<dt id="cgp.problems.Active.get_fitness">
-<tt class="descname">get_fitness</tt><big>(</big><em>individual</em><big>)</big><a class="reference internal" href="_modules/cgp/problems.html#Active.get_fitness"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.problems.Active.get_fitness" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="cgp.problems.Active.max_arity">
-<tt class="descname">max_arity</tt><em class="property"> = 2</em><a class="headerlink" href="#cgp.problems.Active.max_arity" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="cgp.problems.Active.operators">
-<tt class="descname">operators</tt><em class="property"> = [None]</em><a class="headerlink" href="#cgp.problems.Active.operators" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="cgp.problems.Binary_Decode">
-<em class="property">class </em><tt class="descclassname">cgp.problems.</tt><tt class="descname">Binary_Decode</tt><big>(</big><em>config</em><big>)</big><a class="reference internal" href="_modules/cgp/problems.html#Binary_Decode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.problems.Binary_Decode" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cgp.problems.Bounded_Problem" title="cgp.problems.Bounded_Problem"><tt class="xref py py-class docutils literal"><span class="pre">cgp.problems.Bounded_Problem</span></tt></a>, <a class="reference internal" href="#cgp.problems.Binary_Mixin" title="cgp.problems.Binary_Mixin"><tt class="xref py py-class docutils literal"><span class="pre">cgp.problems.Binary_Mixin</span></tt></a></p>
-<dl class="staticmethod">
-<dt id="cgp.problems.Binary_Decode.data_range">
-<em class="property">static </em><tt class="descname">data_range</tt><big>(</big><em>config</em><big>)</big><a class="headerlink" href="#cgp.problems.Binary_Decode.data_range" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates the list of all possible binary strings of specified length
-with exactly one set bit.  <tt class="docutils literal"><span class="pre">config</span></tt> should specify the <tt class="docutils literal"><span class="pre">input_length</span></tt>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="cgp.problems.Binary_Decode.problem_function">
-<tt class="descname">problem_function</tt><big>(</big><em>inputs</em><big>)</big><a class="reference internal" href="_modules/cgp/problems.html#Binary_Decode.problem_function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.problems.Binary_Decode.problem_function" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a 1 on the output line specified by the binary input index</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="cgp.problems.Binary_Encode">
-<em class="property">class </em><tt class="descclassname">cgp.problems.</tt><tt class="descname">Binary_Encode</tt><big>(</big><em>config</em><big>)</big><a class="reference internal" href="_modules/cgp/problems.html#Binary_Encode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.problems.Binary_Encode" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cgp.problems.Bounded_Problem" title="cgp.problems.Bounded_Problem"><tt class="xref py py-class docutils literal"><span class="pre">cgp.problems.Bounded_Problem</span></tt></a>, <a class="reference internal" href="#cgp.problems.Binary_Mixin" title="cgp.problems.Binary_Mixin"><tt class="xref py py-class docutils literal"><span class="pre">cgp.problems.Binary_Mixin</span></tt></a></p>
-<dl class="staticmethod">
-<dt id="cgp.problems.Binary_Encode.data_range">
-<em class="property">static </em><tt class="descname">data_range</tt><big>(</big><em>config</em><big>)</big><a class="headerlink" href="#cgp.problems.Binary_Encode.data_range" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates the list of all possible binary strings of specified length
-with exactly one set bit.  <tt class="docutils literal"><span class="pre">config</span></tt> should specify the <tt class="docutils literal"><span class="pre">input_length</span></tt>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="cgp.problems.Binary_Encode.problem_function">
-<tt class="descname">problem_function</tt><big>(</big><em>inputs</em><big>)</big><a class="reference internal" href="_modules/cgp/problems.html#Binary_Encode.problem_function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.problems.Binary_Encode.problem_function" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the binary encoding of which input line contains a one.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="cgp.problems.Binary_Mixin">
-<em class="property">class </em><tt class="descclassname">cgp.problems.</tt><tt class="descname">Binary_Mixin</tt><a class="reference internal" href="_modules/cgp/problems.html#Binary_Mixin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.problems.Binary_Mixin" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
-<dl class="staticmethod">
-<dt id="cgp.problems.Binary_Mixin.data_range">
-<em class="property">static </em><tt class="descname">data_range</tt><big>(</big><em>config</em><big>)</big><a class="headerlink" href="#cgp.problems.Binary_Mixin.data_range" title="Permalink to this definition">¶</a></dt>
-<dd><p>Given a dictionary specifying the <tt class="docutils literal"><span class="pre">input_length</span></tt>, returns all binary
-values of that length.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="cgp.problems.Binary_Mixin.max_arity">
-<tt class="descname">max_arity</tt><em class="property"> = 2</em><a class="headerlink" href="#cgp.problems.Binary_Mixin.max_arity" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="cgp.problems.Binary_Mixin.operators">
-<tt class="descname">operators</tt><em class="property"> = [&lt;built-in function or_&gt;, &lt;built-in function and_&gt;, &lt;function nand at 0x973e64c&gt;, &lt;function nor at 0x973e684&gt;]</em><a class="headerlink" href="#cgp.problems.Binary_Mixin.operators" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="cgp.problems.Binary_Multiply">
-<em class="property">class </em><tt class="descclassname">cgp.problems.</tt><tt class="descname">Binary_Multiply</tt><big>(</big><em>config</em><big>)</big><a class="reference internal" href="_modules/cgp/problems.html#Binary_Multiply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.problems.Binary_Multiply" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cgp.problems.Bounded_Problem" title="cgp.problems.Bounded_Problem"><tt class="xref py py-class docutils literal"><span class="pre">cgp.problems.Bounded_Problem</span></tt></a>, <a class="reference internal" href="#cgp.problems.Binary_Mixin" title="cgp.problems.Binary_Mixin"><tt class="xref py py-class docutils literal"><span class="pre">cgp.problems.Binary_Mixin</span></tt></a></p>
-<dl class="method">
-<dt id="cgp.problems.Binary_Multiply.problem_function">
-<tt class="descname">problem_function</tt><big>(</big><em>inputs</em><big>)</big><a class="reference internal" href="_modules/cgp/problems.html#Binary_Multiply.problem_function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.problems.Binary_Multiply.problem_function" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the result of performing a binary multiplication of the first
-half of the inputs with the second half.  Will always have the same
-number of output bits as input bits.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="cgp.problems.Bounded_Problem">
-<em class="property">class </em><tt class="descclassname">cgp.problems.</tt><tt class="descname">Bounded_Problem</tt><big>(</big><em>config</em><big>)</big><a class="reference internal" href="_modules/cgp/problems.html#Bounded_Problem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.problems.Bounded_Problem" title="Permalink to this definition">¶</a></dt>
+<dt id="cgp.problems.Problem">
+<em class="property">class </em><tt class="descclassname">cgp.problems.</tt><tt class="descname">Problem</tt><big>(</big><em>problem_function</em>, <em>config</em><big>)</big><a class="reference internal" href="_modules/cgp/problems.html#Problem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.problems.Problem" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
 <p>Object used to store training input values and expected output values
 which are used in evaluating individuals.</p>
 <dl class="method">
-<dt id="cgp.problems.Bounded_Problem.get_fitness">
-<tt class="descname">get_fitness</tt><big>(</big><em>individual</em><big>)</big><a class="reference internal" href="_modules/cgp/problems.html#Bounded_Problem.get_fitness"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.problems.Bounded_Problem.get_fitness" title="Permalink to this definition">¶</a></dt>
+<dt id="cgp.problems.Problem.get_fitness">
+<tt class="descname">get_fitness</tt><big>(</big><em>individual</em><big>)</big><a class="reference internal" href="_modules/cgp/problems.html#Problem.get_fitness"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.problems.Problem.get_fitness" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the fitness of an individual as applied to this problem.</p>
 <p>Parameters:</p>
 <ul class="simple">
@@ -482,249 +288,26 @@ which are used in evaluating individuals.</p>
 </ul>
 </dd></dl>
 
-<dl class="method">
-<dt id="cgp.problems.Bounded_Problem.problem_function">
-<tt class="descname">problem_function</tt><big>(</big><em>_</em><big>)</big><a class="reference internal" href="_modules/cgp/problems.html#Bounded_Problem.problem_function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.problems.Bounded_Problem.problem_function" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="cgp.problems.Bredth">
-<em class="property">class </em><tt class="descclassname">cgp.problems.</tt><tt class="descname">Bredth</tt><big>(</big><em>config</em><big>)</big><a class="reference internal" href="_modules/cgp/problems.html#Bredth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.problems.Bredth" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cgp.problems.Bounded_Problem" title="cgp.problems.Bounded_Problem"><tt class="xref py py-class docutils literal"><span class="pre">cgp.problems.Bounded_Problem</span></tt></a>, <a class="reference internal" href="#cgp.problems.Binary_Mixin" title="cgp.problems.Binary_Mixin"><tt class="xref py py-class docutils literal"><span class="pre">cgp.problems.Binary_Mixin</span></tt></a></p>
-<dl class="staticmethod">
-<dt id="cgp.problems.Bredth.data_range">
-<em class="property">static </em><tt class="descname">data_range</tt><big>(</big><em>config</em><big>)</big><a class="headerlink" href="#cgp.problems.Bredth.data_range" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates the list of all possible binary strings of specified length
-with exactly one set bit.  <tt class="docutils literal"><span class="pre">config</span></tt> should specify the <tt class="docutils literal"><span class="pre">input_length</span></tt>.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="cgp.problems.Bredth.operators">
-<tt class="descname">operators</tt><em class="property"> = [&lt;built-in function or_&gt;]</em><a class="headerlink" href="#cgp.problems.Bredth.operators" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="cgp.problems.Bredth.problem_function">
-<tt class="descname">problem_function</tt><big>(</big><em>inputs</em><big>)</big><a class="reference internal" href="_modules/cgp/problems.html#Bredth.problem_function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.problems.Bredth.problem_function" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="cgp.problems.Demultiplexer">
-<em class="property">class </em><tt class="descclassname">cgp.problems.</tt><tt class="descname">Demultiplexer</tt><big>(</big><em>config</em><big>)</big><a class="reference internal" href="_modules/cgp/problems.html#Demultiplexer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.problems.Demultiplexer" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cgp.problems.Bounded_Problem" title="cgp.problems.Bounded_Problem"><tt class="xref py py-class docutils literal"><span class="pre">cgp.problems.Bounded_Problem</span></tt></a>, <a class="reference internal" href="#cgp.problems.Binary_Mixin" title="cgp.problems.Binary_Mixin"><tt class="xref py py-class docutils literal"><span class="pre">cgp.problems.Binary_Mixin</span></tt></a></p>
-<dl class="method">
-<dt id="cgp.problems.Demultiplexer.problem_function">
-<tt class="descname">problem_function</tt><big>(</big><em>inputs</em><big>)</big><a class="reference internal" href="_modules/cgp/problems.html#Demultiplexer.problem_function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.problems.Demultiplexer.problem_function" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the last input bit on the output line specified by the binary
-index encoded on all inputs except the last bit.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="cgp.problems.Depth">
-<em class="property">class </em><tt class="descclassname">cgp.problems.</tt><tt class="descname">Depth</tt><big>(</big><em>config</em><big>)</big><a class="reference internal" href="_modules/cgp/problems.html#Depth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.problems.Depth" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cgp.problems.Problem" title="cgp.problems.Problem"><tt class="xref py py-class docutils literal"><span class="pre">cgp.problems.Problem</span></tt></a></p>
-<dl class="method">
-<dt id="cgp.problems.Depth.get_fitness">
-<tt class="descname">get_fitness</tt><big>(</big><em>individual</em><big>)</big><a class="reference internal" href="_modules/cgp/problems.html#Depth.get_fitness"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.problems.Depth.get_fitness" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="cgp.problems.Depth.max_arity">
-<tt class="descname">max_arity</tt><em class="property"> = 2</em><a class="headerlink" href="#cgp.problems.Depth.max_arity" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="cgp.problems.Depth.operators">
-<tt class="descname">operators</tt><em class="property"> = [&lt;function &lt;lambda&gt; at 0x973eca4&gt;]</em><a class="headerlink" href="#cgp.problems.Depth.operators" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="cgp.problems.Even_Parity">
-<em class="property">class </em><tt class="descclassname">cgp.problems.</tt><tt class="descname">Even_Parity</tt><big>(</big><em>config</em><big>)</big><a class="reference internal" href="_modules/cgp/problems.html#Even_Parity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.problems.Even_Parity" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cgp.problems.Bounded_Problem" title="cgp.problems.Bounded_Problem"><tt class="xref py py-class docutils literal"><span class="pre">cgp.problems.Bounded_Problem</span></tt></a>, <a class="reference internal" href="#cgp.problems.Binary_Mixin" title="cgp.problems.Binary_Mixin"><tt class="xref py py-class docutils literal"><span class="pre">cgp.problems.Binary_Mixin</span></tt></a></p>
-<dl class="method">
-<dt id="cgp.problems.Even_Parity.problem_function">
-<tt class="descname">problem_function</tt><big>(</big><em>inputs</em><big>)</big><a class="reference internal" href="_modules/cgp/problems.html#Even_Parity.problem_function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.problems.Even_Parity.problem_function" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the even parity of a list of boolean values.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="cgp.problems.Flat">
-<em class="property">class </em><tt class="descclassname">cgp.problems.</tt><tt class="descname">Flat</tt><big>(</big><em>_</em><big>)</big><a class="reference internal" href="_modules/cgp/problems.html#Flat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.problems.Flat" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cgp.problems.Problem" title="cgp.problems.Problem"><tt class="xref py py-class docutils literal"><span class="pre">cgp.problems.Problem</span></tt></a></p>
-<dl class="method">
-<dt id="cgp.problems.Flat.get_fitness">
-<tt class="descname">get_fitness</tt><big>(</big><em>individual</em><big>)</big><a class="reference internal" href="_modules/cgp/problems.html#Flat.get_fitness"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.problems.Flat.get_fitness" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="cgp.problems.Flat.max_arity">
-<tt class="descname">max_arity</tt><em class="property"> = 2</em><a class="headerlink" href="#cgp.problems.Flat.max_arity" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="cgp.problems.Flat.operators">
-<tt class="descname">operators</tt><em class="property"> = [None]</em><a class="headerlink" href="#cgp.problems.Flat.operators" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="cgp.problems.Koza_1">
-<em class="property">class </em><tt class="descclassname">cgp.problems.</tt><tt class="descname">Koza_1</tt><big>(</big><em>config</em><big>)</big><a class="reference internal" href="_modules/cgp/problems.html#Koza_1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.problems.Koza_1" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cgp.problems.Bounded_Problem" title="cgp.problems.Bounded_Problem"><tt class="xref py py-class docutils literal"><span class="pre">cgp.problems.Bounded_Problem</span></tt></a>, <a class="reference internal" href="#cgp.problems.Regression_Mixin" title="cgp.problems.Regression_Mixin"><tt class="xref py py-class docutils literal"><span class="pre">cgp.problems.Regression_Mixin</span></tt></a></p>
-<dl class="method">
-<dt id="cgp.problems.Koza_1.koza_quartic">
-<tt class="descname">koza_quartic</tt><big>(</big><em>inputs</em><big>)</big><a class="reference internal" href="_modules/cgp/problems.html#Koza_1.koza_quartic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.problems.Koza_1.koza_quartic" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the result of Koza-1 on the specified input.  Expects the input
-as a single element list and returns a single element list.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="cgp.problems.Multiplexer">
-<em class="property">class </em><tt class="descclassname">cgp.problems.</tt><tt class="descname">Multiplexer</tt><big>(</big><em>config</em><big>)</big><a class="reference internal" href="_modules/cgp/problems.html#Multiplexer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.problems.Multiplexer" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cgp.problems.Bounded_Problem" title="cgp.problems.Bounded_Problem"><tt class="xref py py-class docutils literal"><span class="pre">cgp.problems.Bounded_Problem</span></tt></a>, <a class="reference internal" href="#cgp.problems.Binary_Mixin" title="cgp.problems.Binary_Mixin"><tt class="xref py py-class docutils literal"><span class="pre">cgp.problems.Binary_Mixin</span></tt></a></p>
-<dl class="method">
-<dt id="cgp.problems.Multiplexer.problem_function">
-<tt class="descname">problem_function</tt><big>(</big><em>inputs</em><big>)</big><a class="reference internal" href="_modules/cgp/problems.html#Multiplexer.problem_function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.problems.Multiplexer.problem_function" title="Permalink to this definition">¶</a></dt>
-<dd><p>Uses the first k bits as a selector for which of the remaining bits to
-return.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="cgp.problems.Neutral">
-<em class="property">class </em><tt class="descclassname">cgp.problems.</tt><tt class="descname">Neutral</tt><big>(</big><em>_</em><big>)</big><a class="reference internal" href="_modules/cgp/problems.html#Neutral"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.problems.Neutral" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cgp.problems.Problem" title="cgp.problems.Problem"><tt class="xref py py-class docutils literal"><span class="pre">cgp.problems.Problem</span></tt></a></p>
-<dl class="method">
-<dt id="cgp.problems.Neutral.get_fitness">
-<tt class="descname">get_fitness</tt><big>(</big><em>_</em><big>)</big><a class="reference internal" href="_modules/cgp/problems.html#Neutral.get_fitness"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.problems.Neutral.get_fitness" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="cgp.problems.Neutral.max_arity">
-<tt class="descname">max_arity</tt><em class="property"> = 2</em><a class="headerlink" href="#cgp.problems.Neutral.max_arity" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="cgp.problems.Neutral.operators">
-<tt class="descname">operators</tt><em class="property"> = [None]</em><a class="headerlink" href="#cgp.problems.Neutral.operators" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="cgp.problems.Pagie_1">
-<em class="property">class </em><tt class="descclassname">cgp.problems.</tt><tt class="descname">Pagie_1</tt><big>(</big><em>config</em><big>)</big><a class="reference internal" href="_modules/cgp/problems.html#Pagie_1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.problems.Pagie_1" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cgp.problems.Bounded_Problem" title="cgp.problems.Bounded_Problem"><tt class="xref py py-class docutils literal"><span class="pre">cgp.problems.Bounded_Problem</span></tt></a>, <a class="reference internal" href="#cgp.problems.Regression_Mixin" title="cgp.problems.Regression_Mixin"><tt class="xref py py-class docutils literal"><span class="pre">cgp.problems.Regression_Mixin</span></tt></a></p>
-<dl class="staticmethod">
-<dt id="cgp.problems.Pagie_1.data_range">
-<em class="property">static </em><tt class="descname">data_range</tt><big>(</big><em>config</em><big>)</big><a class="headerlink" href="#cgp.problems.Pagie_1.data_range" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a multidimensional grid of points in the input space.</p>
-<p>Parameters:</p>
-<ul class="simple">
-<li><tt class="docutils literal"><span class="pre">config</span></tt>: A dictionary containing information about the input space.
-- All configuration information required by <tt class="docutils literal"><span class="pre">float_range</span></tt>.
-- <tt class="docutils literal"><span class="pre">input_length</span></tt>: How many dimensions are in the input space.</li>
-</ul>
-</dd></dl>
-
-<dl class="method">
-<dt id="cgp.problems.Pagie_1.pagie">
-<tt class="descname">pagie</tt><big>(</big><em>inputs</em><big>)</big><a class="reference internal" href="_modules/cgp/problems.html#Pagie_1.pagie"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.problems.Pagie_1.pagie" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the result of Pagie-1 on the specified inputs.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="cgp.problems.Problem">
-<em class="property">class </em><tt class="descclassname">cgp.problems.</tt><tt class="descname">Problem</tt><big>(</big><em>config</em><big>)</big><a class="reference internal" href="_modules/cgp/problems.html#Problem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.problems.Problem" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
-<dl class="method">
-<dt id="cgp.problems.Problem.get_fitness">
-<tt class="descname">get_fitness</tt><big>(</big><em>individual</em><big>)</big><a class="reference internal" href="_modules/cgp/problems.html#Problem.get_fitness"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.problems.Problem.get_fitness" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="cgp.problems.Regression_Mixin">
-<em class="property">class </em><tt class="descclassname">cgp.problems.</tt><tt class="descname">Regression_Mixin</tt><a class="reference internal" href="_modules/cgp/problems.html#Regression_Mixin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.problems.Regression_Mixin" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
-<dl class="staticmethod">
-<dt id="cgp.problems.Regression_Mixin.data_range">
-<em class="property">static </em><tt class="descname">data_range</tt><big>(</big><em>config</em><big>)</big><a class="headerlink" href="#cgp.problems.Regression_Mixin.data_range" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a incremental range of a floating point value.  Like range() for
-floats.</p>
-<p>Parameters:</p>
-<ul class="simple">
-<li><tt class="docutils literal"><span class="pre">config</span></tt>: A dictionary containing information about the input space.
-- <tt class="docutils literal"><span class="pre">min</span></tt>: The minimum valid value in the space.
-- <tt class="docutils literal"><span class="pre">max</span></tt>: The maximum valid value in the space.
-- <tt class="docutils literal"><span class="pre">step</span></tt>: The distance between sample points.</li>
-</ul>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="cgp.problems.Regression_Mixin.max_arity">
-<tt class="descname">max_arity</tt><em class="property"> = 2</em><a class="headerlink" href="#cgp.problems.Regression_Mixin.max_arity" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="cgp.problems.Regression_Mixin.operators">
-<tt class="descname">operators</tt><em class="property"> = [&lt;function add at 0x973e72c&gt;, &lt;function sub at 0x973e764&gt;, &lt;function mul at 0x973e79c&gt;, &lt;function div at 0x973e7d4&gt;]</em><a class="headerlink" href="#cgp.problems.Regression_Mixin.operators" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="cgp.problems.TwoFloor">
-<em class="property">class </em><tt class="descclassname">cgp.problems.</tt><tt class="descname">TwoFloor</tt><big>(</big><em>config</em><big>)</big><a class="reference internal" href="_modules/cgp/problems.html#TwoFloor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.problems.TwoFloor" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cgp.problems.Bounded_Problem" title="cgp.problems.Bounded_Problem"><tt class="xref py py-class docutils literal"><span class="pre">cgp.problems.Bounded_Problem</span></tt></a>, <a class="reference internal" href="#cgp.problems.Binary_Mixin" title="cgp.problems.Binary_Mixin"><tt class="xref py py-class docutils literal"><span class="pre">cgp.problems.Binary_Mixin</span></tt></a></p>
-<dl class="staticmethod">
-<dt id="cgp.problems.TwoFloor.data_range">
-<em class="property">static </em><tt class="descname">data_range</tt><big>(</big><em>config</em><big>)</big><a class="headerlink" href="#cgp.problems.TwoFloor.data_range" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates the list of all possible binary strings of specified length
-with exactly one set bit.  <tt class="docutils literal"><span class="pre">config</span></tt> should specify the <tt class="docutils literal"><span class="pre">input_length</span></tt>.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="cgp.problems.TwoFloor.operators">
-<tt class="descname">operators</tt><em class="property"> = [&lt;built-in function or_&gt;]</em><a class="headerlink" href="#cgp.problems.TwoFloor.operators" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="cgp.problems.TwoFloor.problem_function">
-<tt class="descname">problem_function</tt><big>(</big><em>inputs</em><big>)</big><a class="reference internal" href="_modules/cgp/problems.html#TwoFloor.problem_function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.problems.TwoFloor.problem_function" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
 </dd></dl>
 
 <dl class="function">
-<dt id="cgp.problems.arity_controlled">
-<tt class="descclassname">cgp.problems.</tt><tt class="descname">arity_controlled</tt><big>(</big><em>desired</em><big>)</big><a class="reference internal" href="_modules/cgp/problems.html#arity_controlled"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.problems.arity_controlled" title="Permalink to this definition">¶</a></dt>
-<dd><p>Decorator used to make functions take any number of inputs while only
-using the first <tt class="docutils literal"><span class="pre">desired</span></tt> number of arguments.  For example, you can
-pass 10 arguments to a function that takes only 1 if <tt class="docutils literal"><span class="pre">desired=1</span></tt> and
-the first of the arguments will actually be used.</p>
-<p>Parameters:</p>
-<ul class="simple">
-<li><tt class="docutils literal"><span class="pre">desired</span></tt>: The actual arity of the wrapped function.</li>
-</ul>
+<dt id="cgp.problems.binary_decode">
+<tt class="descclassname">cgp.problems.</tt><tt class="descname">binary_decode</tt><big>(</big><em>inputs</em><big>)</big><a class="reference internal" href="_modules/cgp/problems.html#binary_decode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.problems.binary_decode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a 1 on the output line specified by the binary input index</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="cgp.problems.binary_encode">
+<tt class="descclassname">cgp.problems.</tt><tt class="descname">binary_encode</tt><big>(</big><em>inputs</em><big>)</big><a class="reference internal" href="_modules/cgp/problems.html#binary_encode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.problems.binary_encode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the binary encoding of which input line contains a one.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="cgp.problems.binary_multiply">
+<tt class="descclassname">cgp.problems.</tt><tt class="descname">binary_multiply</tt><big>(</big><em>inputs</em><big>)</big><a class="reference internal" href="_modules/cgp/problems.html#binary_multiply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.problems.binary_multiply" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the result of performing a binary multiplication of the first half
+of the inputs with the second half.  Will always have the same number of
+output bits as input bits.</p>
 </dd></dl>
 
 <dl class="function">
@@ -735,43 +318,9 @@ values of that length.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="cgp.problems.float_range">
-<tt class="descclassname">cgp.problems.</tt><tt class="descname">float_range</tt><big>(</big><em>config</em><big>)</big><a class="reference internal" href="_modules/cgp/problems.html#float_range"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.problems.float_range" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a incremental range of a floating point value.  Like range() for
-floats.</p>
-<p>Parameters:</p>
-<ul class="simple">
-<li><tt class="docutils literal"><span class="pre">config</span></tt>: A dictionary containing information about the input space.
-- <tt class="docutils literal"><span class="pre">min</span></tt>: The minimum valid value in the space.
-- <tt class="docutils literal"><span class="pre">max</span></tt>: The maximum valid value in the space.
-- <tt class="docutils literal"><span class="pre">step</span></tt>: The distance between sample points.</li>
-</ul>
-</dd></dl>
-
-<dl class="function">
-<dt id="cgp.problems.float_samples">
-<tt class="descclassname">cgp.problems.</tt><tt class="descname">float_samples</tt><big>(</big><em>config</em><big>)</big><a class="reference internal" href="_modules/cgp/problems.html#float_samples"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.problems.float_samples" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns random samples of the input space.</p>
-<p>Parameters:</p>
-<ul class="simple">
-<li><tt class="docutils literal"><span class="pre">config</span></tt>: A dictionary containing information about the input space.
-- <tt class="docutils literal"><span class="pre">min</span></tt>: The minimum valid value in the space.
-- <tt class="docutils literal"><span class="pre">max</span></tt>: The maximum valid value in the space.
-- <tt class="docutils literal"><span class="pre">input_length</span></tt>: The number of input variables.
-- <tt class="docutils literal"><span class="pre">samples</span></tt>: The number of samples to draw.</li>
-</ul>
-</dd></dl>
-
-<dl class="function">
-<dt id="cgp.problems.n_dimensional_grid">
-<tt class="descclassname">cgp.problems.</tt><tt class="descname">n_dimensional_grid</tt><big>(</big><em>config</em><big>)</big><a class="reference internal" href="_modules/cgp/problems.html#n_dimensional_grid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.problems.n_dimensional_grid" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a multidimensional grid of points in the input space.</p>
-<p>Parameters:</p>
-<ul class="simple">
-<li><tt class="docutils literal"><span class="pre">config</span></tt>: A dictionary containing information about the input space.
-- All configuration information required by <tt class="docutils literal"><span class="pre">float_range</span></tt>.
-- <tt class="docutils literal"><span class="pre">input_length</span></tt>: How many dimensions are in the input space.</li>
-</ul>
+<dt id="cgp.problems.even_parity">
+<tt class="descclassname">cgp.problems.</tt><tt class="descname">even_parity</tt><big>(</big><em>inputs</em><big>)</big><a class="reference internal" href="_modules/cgp/problems.html#even_parity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.problems.even_parity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the even parity of a list of boolean values.</p>
 </dd></dl>
 
 <dl class="function">
@@ -787,14 +336,14 @@ floats.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="cgp.problems.protected">
-<tt class="descclassname">cgp.problems.</tt><tt class="descname">protected</tt><big>(</big><em>function</em><big>)</big><a class="reference internal" href="_modules/cgp/problems.html#protected"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.problems.protected" title="Permalink to this definition">¶</a></dt>
-<dd><p>Decorator that ensures decorated functions always have a valid output.
-If an exception occurs or infinity is returned, the first argument of the
-function will be returned.</p>
-<p>Parameters:</p>
+<dt id="cgp.problems.problem_attributes">
+<tt class="descclassname">cgp.problems.</tt><tt class="descname">problem_attributes</tt><big>(</big><em>range_method</em>, <em>operators</em>, <em>max_arity</em><big>)</big><a class="reference internal" href="_modules/cgp/problems.html#problem_attributes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.problems.problem_attributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator that adds attributes to problem functions.</p>
+<p>Parameters</p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">function</span></tt>: The function to be decorated.</li>
+<li><tt class="docutils literal"><span class="pre">range_method</span></tt>: The function used to generate training input values.</li>
+<li><tt class="docutils literal"><span class="pre">operators</span></tt>: The list of valid operators on this problem.</li>
+<li><tt class="docutils literal"><span class="pre">max_arity</span></tt>: The maximum arity of all operators.</li>
 </ul>
 </dd></dl>
 
@@ -809,19 +358,6 @@ with exactly one set bit.  <tt class="docutils literal"><span class="pre">config
 <div class="section" id="module-cgp.util">
 <span id="util-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">util</span></tt> Module<a class="headerlink" href="#module-cgp.util" title="Permalink to this headline">¶</a></h2>
 <p>Collection of utility functions with no other obvious home.</p>
-<dl class="function">
-<dt id="cgp.util.best_of_k">
-<tt class="descclassname">cgp.util.</tt><tt class="descname">best_of_k</tt><big>(</big><em>data</em>, <em>k</em>, <em>minimum=False</em><big>)</big><a class="reference internal" href="_modules/cgp/util.html#best_of_k"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.util.best_of_k" title="Permalink to this definition">¶</a></dt>
-<dd><p>Given a set of data, predict what the expected best result of drawing
-<tt class="docutils literal"><span class="pre">k</span></tt> samples from the same distribution.</p>
-<p>Parameters</p>
-<ul class="simple">
-<li><tt class="docutils literal"><span class="pre">data</span></tt>: The set of data drawn from the distribution being analyzed.</li>
-<li><tt class="docutils literal"><span class="pre">k</span></tt>: The number of samples to be drawn from the distribution.</li>
-<li><tt class="docutils literal"><span class="pre">minimum</span></tt>: Specifies if you want the worst of k instead of the best.</li>
-</ul>
-</dd></dl>
-
 <dl class="function">
 <dt id="cgp.util.diff_count">
 <tt class="descclassname">cgp.util.</tt><tt class="descname">diff_count</tt><big>(</big><em>data1</em>, <em>data2</em><big>)</big><a class="reference internal" href="_modules/cgp/util.html#diff_count"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.util.diff_count" title="Permalink to this definition">¶</a></dt>
@@ -848,16 +384,6 @@ Can be used to read compressed configurations.</li>
 </dd></dl>
 
 <dl class="function">
-<dt id="cgp.util.meanstd">
-<tt class="descclassname">cgp.util.</tt><tt class="descname">meanstd</tt><big>(</big><em>data</em><big>)</big><a class="reference internal" href="_modules/cgp/util.html#meanstd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.util.meanstd" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the mean and standard deviation of the given data.</p>
-<p>Parameters:</p>
-<ul class="simple">
-<li><tt class="docutils literal"><span class="pre">data</span></tt>: The data to find the mean and standard deviation of.</li>
-</ul>
-</dd></dl>
-
-<dl class="function">
 <dt id="cgp.util.median_deviation">
 <tt class="descclassname">cgp.util.</tt><tt class="descname">median_deviation</tt><big>(</big><em>data</em>, <em>median=None</em><big>)</big><a class="reference internal" href="_modules/cgp/util.html#median_deviation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.util.median_deviation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the median and the median absolute deviation of the data.</p>
@@ -866,19 +392,6 @@ Can be used to read compressed configurations.</li>
 <li><tt class="docutils literal"><span class="pre">data</span></tt>: The data to find the medians of.</li>
 <li><tt class="docutils literal"><span class="pre">median</span></tt>: If the median is already known you can pass it in to save
 time.</li>
-</ul>
-</dd></dl>
-
-<dl class="function">
-<dt id="cgp.util.resample_probability">
-<tt class="descclassname">cgp.util.</tt><tt class="descname">resample_probability</tt><big>(</big><em>i</em>, <em>k</em>, <em>n</em><big>)</big><a class="reference internal" href="_modules/cgp/util.html#resample_probability"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cgp.util.resample_probability" title="Permalink to this definition">¶</a></dt>
-<dd><p>Given <tt class="docutils literal"><span class="pre">k</span></tt> samples from <tt class="docutils literal"><span class="pre">n</span></tt> items, what is the probability that the
-<tt class="docutils literal"><span class="pre">ith</span></tt> best element in the original set is the best found in the sample.</p>
-<p>Parameters:</p>
-<ul class="simple">
-<li><tt class="docutils literal"><span class="pre">i</span></tt>: The index being predicted.</li>
-<li><tt class="docutils literal"><span class="pre">k</span></tt>: The sample size being drawn.</li>
-<li><tt class="docutils literal"><span class="pre">n</span></tt>: The number of items being drawn from.</li>
 </ul>
 </dd></dl>
 
