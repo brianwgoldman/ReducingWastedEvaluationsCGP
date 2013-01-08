@@ -18,7 +18,7 @@ import sys
 from os import path
 from collections import defaultdict
 from main import combine_results
-from util import wilcoxon_signed_rank, linecycler
+from util import wilcoxon_signed_rank, linecycler, colorcycler
 
 # Dictionary converter from original name to name used in paper
 pretty_name = {"normal": "Normal",
@@ -89,7 +89,7 @@ if __name__ == '__main__':
             print version, line
             continue
         loglog(X, Y, label=pretty_name[version], linestyle=next(linecycler),
-               linewidth=2.5)
+               linewidth=2.5, color=next(colorcycler))
 
     legend(loc='best')
     xlabel("Mutation Rate")

@@ -133,3 +133,6 @@ def wilcoxon_signed_rank(d1, d2):
 
 # Generator used when plotting to cylce through the different line styles
 linecycler = cycle(["-", "--", "-.", ":"])
+
+# Generator used when plotting to cylce through the different line colors
+colorcycler = cycle(['b', 'g', 'r', 'k'])
