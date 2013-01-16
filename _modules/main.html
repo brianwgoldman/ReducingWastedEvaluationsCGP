@@ -8,38 +8,38 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>cgp.main &mdash; Reducing Wasted Evaluations in Cartesian Genetic Programming 1.0 documentation</title>
+    <title>main &mdash; Reducing Wasted Evaluations in Cartesian Genetic Programming 1.0 documentation</title>
     
-    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../../',
+        URL_ROOT:    '../',
         VERSION:     '1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="top" title="Reducing Wasted Evaluations in Cartesian Genetic Programming 1.0 documentation" href="../../index.html" />
-    <link rel="up" title="Module code" href="../index.html" /> 
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Reducing Wasted Evaluations in Cartesian Genetic Programming 1.0 documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" /> 
   </head>
   <body>
     <div class="related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
+          <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
+          <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../index.html">Reducing Wasted Evaluations in Cartesian Genetic Programming 1.0 documentation</a> &raquo;</li>
-          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+        <li><a href="../index.html">Reducing Wasted Evaluations in Cartesian Genetic Programming 1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -48,7 +48,7 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <h1>Source code for cgp.main</h1><div class="highlight"><pre>
+  <h1>Source code for main</h1><div class="highlight"><pre>
 <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">This module is intended to duplicate the &#39;main()&#39; function found in other</span>
 <span class="sd">languages such as C++ and Java.  In order to run an experiment, this module</span>
@@ -69,17 +69,17 @@
 <span class="sd">output turned on, outputting the results to output/test_run.dat.</span>
 
 <span class="sd">``pypy main.py cfg/once.cfg cfg/parity.cfg -g 3000 -m 0.01</span>
-<span class="sd">-seed 13 -s mutate_until_change -v -o output/test_run.dat``</span>
+<span class="sd">-seed 13 -s accumulate -v -o output/test_run.dat``</span>
 
 <span class="sd">For any support questions email brianwgoldman@acm.org.</span>
 <span class="sd">&#39;&#39;&#39;</span>
 
-<span class="kn">from</span> <span class="nn">evolution</span> <span class="kn">import</span> <span class="n">Individual</span><span class="p">,</span> <span class="n">multi_indepenedent</span>
+<span class="kn">from</span> <span class="nn">evolution</span> <span class="kn">import</span> <span class="n">Individual</span><span class="p">,</span> <span class="n">generate</span>
 <span class="kn">import</span> <span class="nn">problems</span>
 <span class="kn">import</span> <span class="nn">util</span>
 
 
-<div class="viewcode-block" id="one_run"><a class="viewcode-back" href="../../cgp.html#cgp.main.one_run">[docs]</a><span class="k">def</span> <span class="nf">one_run</span><span class="p">(</span><span class="n">evaluator</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+<div class="viewcode-block" id="one_run"><a class="viewcode-back" href="../code.html#main.one_run">[docs]</a><span class="k">def</span> <span class="nf">one_run</span><span class="p">(</span><span class="n">evaluator</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Performs a single run of the given configuration.  Returns a dictionary</span>
 <span class="sd">    containing results.</span>
@@ -92,7 +92,7 @@
 <span class="sd">      required to perform a experimental run, including:</span>
 
 <span class="sd">      - All information required to initialize an individual.</span>
-<span class="sd">      - All information required to run ``evolution.multi_independent``.</span>
+<span class="sd">      - All information required to run ``evolution.generate``.</span>
 <span class="sd">      - ``verbose``: Boolean value for if extra runtime information should</span>
 <span class="sd">        be displayed.</span>
 <span class="sd">      - ``max_evals``: The maximum number of evaluations allowed before</span>
@@ -101,15 +101,13 @@
 <span class="sd">        termination.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
     <span class="n">best</span> <span class="o">=</span> <span class="n">Individual</span><span class="p">(</span><span class="o">**</span><span class="n">config</span><span class="p">)</span>
-    <span class="n">last_improved</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
     <span class="n">output</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">for</span> <span class="n">evals</span><span class="p">,</span> <span class="n">individual</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">multi_indepenedent</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">output</span><span class="p">)):</span>
+    <span class="k">for</span> <span class="n">evals</span><span class="p">,</span> <span class="n">individual</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">generate</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">output</span><span class="p">)):</span>
         <span class="n">individual</span><span class="o">.</span><span class="n">fitness</span> <span class="o">=</span> <span class="n">evaluator</span><span class="o">.</span><span class="n">get_fitness</span><span class="p">(</span><span class="n">individual</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">best</span> <span class="o">&lt;</span> <span class="n">individual</span><span class="p">:</span>
             <span class="n">best</span> <span class="o">=</span> <span class="n">individual</span>
-            <span class="n">last_improved</span> <span class="o">=</span> <span class="n">evals</span>
             <span class="k">if</span> <span class="n">config</span><span class="p">[</span><span class="s">&#39;verbose&#39;</span><span class="p">]:</span>
-                <span class="k">print</span> <span class="s">&#39;</span><span class="se">\t</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">last_improved</span><span class="p">,</span> <span class="n">best</span><span class="o">.</span><span class="n">fitness</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">best</span><span class="o">.</span><span class="n">active</span><span class="p">)</span>
+                <span class="k">print</span> <span class="s">&#39;</span><span class="se">\t</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">evals</span><span class="p">,</span> <span class="n">best</span><span class="o">.</span><span class="n">fitness</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">best</span><span class="o">.</span><span class="n">active</span><span class="p">)</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">evals</span> <span class="o">&gt;=</span> <span class="n">config</span><span class="p">[</span><span class="s">&#39;max_evals&#39;</span><span class="p">]</span> <span class="ow">or</span>
             <span class="n">best</span><span class="o">.</span><span class="n">fitness</span> <span class="o">&gt;=</span> <span class="n">config</span><span class="p">[</span><span class="s">&#39;max_fitness&#39;</span><span class="p">]):</span>
             <span class="k">break</span>
@@ -119,11 +117,13 @@
     <span class="n">output</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s">&#39;fitness&#39;</span><span class="p">:</span> <span class="n">best</span><span class="o">.</span><span class="n">fitness</span><span class="p">,</span> <span class="s">&#39;evals&#39;</span><span class="p">:</span> <span class="n">evals</span><span class="p">,</span>
                    <span class="s">&#39;success&#39;</span><span class="p">:</span> <span class="n">best</span><span class="o">.</span><span class="n">fitness</span> <span class="o">&gt;=</span> <span class="n">config</span><span class="p">[</span><span class="s">&#39;max_fitness&#39;</span><span class="p">],</span>
                    <span class="s">&#39;phenotype&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">best</span><span class="o">.</span><span class="n">active</span><span class="p">),</span>
+                   <span class="c"># When running &#39;Skip&#39; this will correctly give the number</span>
+                   <span class="c"># of evaluations required by &#39;Normal&#39;.  Otherwise its junk.</span>
                    <span class="s">&#39;normal&#39;</span><span class="p">:</span> <span class="n">output</span><span class="p">[</span><span class="s">&#39;skipped&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">evals</span><span class="p">})</span>
     <span class="k">return</span> <span class="n">output</span>
 
 </div>
-<div class="viewcode-block" id="all_runs"><a class="viewcode-back" href="../../cgp.html#cgp.main.all_runs">[docs]</a><span class="k">def</span> <span class="nf">all_runs</span><span class="p">(</span><span class="n">config</span><span class="p">):</span>
+<div class="viewcode-block" id="all_runs"><a class="viewcode-back" href="../code.html#main.all_runs">[docs]</a><span class="k">def</span> <span class="nf">all_runs</span><span class="p">(</span><span class="n">config</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Perform all of the requested runs on a given problem.  Returns a list of</span>
 <span class="sd">    the dictionaries returned by ``one_run``.  Will give results for all</span>
@@ -156,7 +156,7 @@
     <span class="k">return</span> <span class="n">results</span>
 
 </div>
-<div class="viewcode-block" id="combine_results"><a class="viewcode-back" href="../../cgp.html#cgp.main.combine_results">[docs]</a><span class="k">def</span> <span class="nf">combine_results</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
+<div class="viewcode-block" id="combine_results"><a class="viewcode-back" href="../code.html#main.combine_results">[docs]</a><span class="k">def</span> <span class="nf">combine_results</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Given a list of result dictionaries, return analysis information such as</span>
 <span class="sd">    the median values of each statistic as well as the median absolute</span>
@@ -201,41 +201,25 @@
                         <span class="n">help</span><span class="o">=</span><span class="s">&#39;The number of nodes in the CGP graph&#39;</span><span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&#39;-m&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s">&#39;mutation_rate&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
                         <span class="n">help</span><span class="o">=</span><span class="s">&#39;Use the specified mutation rate.&#39;</span><span class="p">)</span>
-    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&#39;-p&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s">&#39;problem&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
-                        <span class="n">help</span><span class="o">=</span><span class="s">&#39;Use the specified problem.&#39;</span><span class="p">)</span>
-    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&#39;-pop_size&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s">&#39;pop_size&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
-                        <span class="n">help</span><span class="o">=</span><span class="s">&#39;Use the specified population size.&#39;</span><span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&#39;-seed&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s">&#39;seed&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
                         <span class="n">help</span><span class="o">=</span><span class="s">&#39;Use the specified random seed used&#39;</span><span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&#39;-s&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s">&#39;speed&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
                         <span class="n">help</span><span class="o">=</span><span class="s">&#39;Specifies if evolution should should avoid&#39;</span> <span class="o">+</span>
                         <span class="s">&#39; duplicated evaluations.  Valid settings are: &#39;</span> <span class="o">+</span>
-                        <span class="s">&#39;normal, no_reeval, mutate_until_change&#39;</span><span class="p">)</span>
-    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&#39;-r&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s">&#39;reorder&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s">&#39;store_true&#39;</span><span class="p">,</span>
-                        <span class="n">help</span><span class="o">=</span><span class="s">&#39;Include this flag to have mutant reordering&#39;</span><span class="p">)</span>
-    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&#39;-dag&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s">&#39;dag&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s">&#39;store_true&#39;</span><span class="p">,</span>
-                        <span class="n">help</span><span class="o">=</span><span class="s">&#39;Include this flag for full dag representation&#39;</span><span class="p">)</span>
-    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&#39;-one&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s">&#39;one_active_mutation&#39;</span><span class="p">,</span>
-                        <span class="n">action</span><span class="o">=</span><span class="s">&#39;store_true&#39;</span><span class="p">,</span>
-                        <span class="n">help</span><span class="o">=</span><span class="s">&#39;Include this flag for one at a time mutation&#39;</span><span class="p">)</span>
+                        <span class="s">&#39;normal, skip, accumulate, single&#39;</span><span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&#39;-c&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s">&#39;output_config&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
                         <span class="n">help</span><span class="o">=</span><span class="s">&#39;Outputs a single configuration file containing&#39;</span> <span class="o">+</span>
                         <span class="s">&#39; the entire configuration used in this run&#39;</span><span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&#39;-v&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s">&#39;verbose&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s">&#39;store_true&#39;</span><span class="p">,</span>
                         <span class="n">help</span><span class="o">=</span><span class="s">&#39;Include this flag to increase periodic output&#39;</span><span class="p">)</span>
-
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&#39;-o&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s">&#39;output_results&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
                         <span class="n">help</span><span class="o">=</span><span class="s">&#39;Specify a file to output the results.&#39;</span><span class="p">)</span>
-
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&#39;-profile&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s">&#39;profile&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s">&#39;store_true&#39;</span><span class="p">,</span>
                         <span class="n">help</span><span class="o">=</span><span class="s">&#39;Include this flag to run a profiler&#39;</span><span class="p">)</span>
 
     <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
     <span class="n">config</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">load_configurations</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">configs</span><span class="p">)</span>
     <span class="n">config</span><span class="p">[</span><span class="s">&#39;verbose&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">verbose</span>
-    <span class="n">config</span><span class="p">[</span><span class="s">&#39;reorder&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">reorder</span>
-    <span class="n">config</span><span class="p">[</span><span class="s">&#39;dag&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">dag</span>
-    <span class="n">config</span><span class="p">[</span><span class="s">&#39;one_active_mutation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">one_active_mutation</span>
 
     <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">seed</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">:</span>
         <span class="n">config</span><span class="p">[</span><span class="s">&#39;seed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">seed</span>
@@ -248,12 +232,6 @@
 
     <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">mutation_rate</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">:</span>
         <span class="n">config</span><span class="p">[</span><span class="s">&#39;mutation_rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">mutation_rate</span>
-
-    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">problem</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">config</span><span class="p">[</span><span class="s">&#39;problem&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">problem</span>
-
-    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">pop_size</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">config</span><span class="p">[</span><span class="s">&#39;pop_size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">pop_size</span>
 
     <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">speed</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">:</span>
         <span class="n">config</span><span class="p">[</span><span class="s">&#39;speed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">speed</span>
@@ -283,7 +261,7 @@
         <div class="sphinxsidebarwrapper">
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
-    <form class="search" action="../../search.html" method="get">
+    <form class="search" action="../search.html" method="get">
       <input type="text" name="q" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
@@ -302,13 +280,13 @@
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
+          <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
+          <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../index.html">Reducing Wasted Evaluations in Cartesian Genetic Programming 1.0 documentation</a> &raquo;</li>
-          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+        <li><a href="../index.html">Reducing Wasted Evaluations in Cartesian Genetic Programming 1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

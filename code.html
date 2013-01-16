@@ -1,0 +1,503 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>main &mdash; Reducing Wasted Evaluations in Cartesian Genetic Programming 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Reducing Wasted Evaluations in Cartesian Genetic Programming 1.0 documentation" href="index.html" />
+    <link rel="prev" title="Reducing Wasted Evaluations in Cartesian Genetic Programming" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Reducing Wasted Evaluations in Cartesian Genetic Programming"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Reducing Wasted Evaluations in Cartesian Genetic Programming 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-main">
+<span id="main"></span><h1><a class="reference internal" href="#module-main" title="main"><tt class="xref py py-mod docutils literal"><span class="pre">main</span></tt></a><a class="headerlink" href="#module-main" title="Permalink to this headline">¶</a></h1>
+<p>This module is intended to duplicate the &#8216;main()&#8217; function found in other
+languages such as C++ and Java.  In order to run an experiment, this module
+should be passes to your interpreter.  In the interest of speed and consistency
+we suggest that PyPy 1.9.0 be used to run this code, although
+Python 2.7 should be able to handle it correctly.</p>
+<p>To see a full description of this modules command line arguments, run
+<tt class="docutils literal"><span class="pre">``pypy</span> <span class="pre">main.py</span> <span class="pre">-h``</span></tt>.</p>
+<p>Provided with this code should be the <tt class="docutils literal"><span class="pre">cfg</span></tt> folder which contains some
+configuration files useful for running experiments.  These files can be passed
+to main along with other configuration information in order to recreate
+the experiments performed in the Reducing Wasted Evaluations in Cartesian
+Genetic Programming publication.  For example, the following command runs a
+the <tt class="docutils literal"><span class="pre">Accumulate</span></tt> mutation method on the Parity problem using seed number
+13 with 3000 nodes in the graph and a mutation rate of 0.01 with verbose
+output turned on, outputting the results to output/test_run.dat.</p>
+<p><tt class="docutils literal"><span class="pre">pypy</span> <span class="pre">main.py</span> <span class="pre">cfg/once.cfg</span> <span class="pre">cfg/parity.cfg</span> <span class="pre">-g</span> <span class="pre">3000</span> <span class="pre">-m</span> <span class="pre">0.01</span>
+<span class="pre">-seed</span> <span class="pre">13</span> <span class="pre">-s</span> <span class="pre">accumulate</span> <span class="pre">-v</span> <span class="pre">-o</span> <span class="pre">output/test_run.dat</span></tt></p>
+<p>For any support questions email <a class="reference external" href="mailto:brianwgoldman&#37;&#52;&#48;acm&#46;org">brianwgoldman<span>&#64;</span>acm<span>&#46;</span>org</a>.</p>
+<dl class="function">
+<dt id="main.all_runs">
+<tt class="descclassname">main.</tt><tt class="descname">all_runs</tt><big>(</big><em>config</em><big>)</big><a class="reference internal" href="_modules/main.html#all_runs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#main.all_runs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform all of the requested runs on a given problem.  Returns a list of
+the dictionaries returned by <tt class="docutils literal"><span class="pre">one_run</span></tt>.  Will give results for all
+completed runs if a keyboard interrupt is received.</p>
+<p>Parameters:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">config</span></tt>: Dictionary containing all configuration information required
+to perform all of the necessary runs of the experiment.  Should contain
+values for:<ul>
+<li>All configuration information needed by <tt class="docutils literal"><span class="pre">one_run</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">problem</span></tt>: The name of which problem from the <tt class="docutils literal"><span class="pre">problem</span></tt> module to
+run experiments on.</li>
+<li><tt class="docutils literal"><span class="pre">runs</span></tt>: How many runs to perform</li>
+</ul>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="main.combine_results">
+<tt class="descclassname">main.</tt><tt class="descname">combine_results</tt><big>(</big><em>results</em><big>)</big><a class="reference internal" href="_modules/main.html#combine_results"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#main.combine_results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a list of result dictionaries, return analysis information such as
+the median values of each statistic as well as the median absolute
+deviation.</p>
+<p>Parameters:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">results</span></tt>: A list of dictionaries containing similar key values.</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="main.one_run">
+<tt class="descclassname">main.</tt><tt class="descname">one_run</tt><big>(</big><em>evaluator</em>, <em>config</em><big>)</big><a class="reference internal" href="_modules/main.html#one_run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#main.one_run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs a single run of the given configuration.  Returns a dictionary
+containing results.</p>
+<p>Parameters:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">evaluator</span></tt>: An object with the function get_fitness that takes an
+individual and returns its fitness value</li>
+<li><tt class="docutils literal"><span class="pre">config</span></tt>: A dictionary containing all of the configuration information
+required to perform a experimental run, including:<ul>
+<li>All information required to initialize an individual.</li>
+<li>All information required to run <tt class="docutils literal"><span class="pre">evolution.generate</span></tt>.</li>
+<li><tt class="docutils literal"><span class="pre">verbose</span></tt>: Boolean value for if extra runtime information should
+be displayed.</li>
+<li><tt class="docutils literal"><span class="pre">max_evals</span></tt>: The maximum number of evaluations allowed before
+termination.</li>
+<li><tt class="docutils literal"><span class="pre">max_fitness</span></tt>: The fitness required to cause a &#8220;successful&#8221;
+termination.</li>
+</ul>
+</li>
+</ul>
+</dd></dl>
+
+</div>
+<div class="section" id="module-evolution">
+<span id="evolution"></span><h1><a class="reference internal" href="#module-evolution" title="evolution"><tt class="xref py py-mod docutils literal"><span class="pre">evolution</span></tt></a><a class="headerlink" href="#module-evolution" title="Permalink to this headline">¶</a></h1>
+<p>Handles how to perform all of the actual evolution.</p>
+<dl class="class">
+<dt id="evolution.Individual">
+<em class="property">class </em><tt class="descclassname">evolution.</tt><tt class="descname">Individual</tt><big>(</big><em>graph_length</em>, <em>input_length</em>, <em>output_length</em>, <em>max_arity</em>, <em>function_list</em>, <em>**_</em><big>)</big><a class="reference internal" href="_modules/evolution.html#Individual"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#evolution.Individual" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>An individual object used to combine gene fitness with genomes, as
+well methods for manipulating those genomes.</p>
+<dl class="method">
+<dt id="evolution.Individual.asym_phenotypic_difference">
+<tt class="descname">asym_phenotypic_difference</tt><big>(</big><em>other</em><big>)</big><a class="reference internal" href="_modules/evolution.html#Individual.asym_phenotypic_difference"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#evolution.Individual.asym_phenotypic_difference" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine how many genes would have to be mutated in order to make
+the <tt class="docutils literal"><span class="pre">other</span></tt> individual phenotypically identical to <tt class="docutils literal"><span class="pre">self</span></tt>.</p>
+<p>Parameters:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">other</span></tt>: The individual to compare with.</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="evolution.Individual.connections">
+<tt class="descname">connections</tt><big>(</big><em>node_index</em><big>)</big><a class="reference internal" href="_modules/evolution.html#Individual.connections"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#evolution.Individual.connections" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the list of connections that a specified node has.</p>
+<p>Parameters</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">node_index</span></tt>: The index of the node information is being requested
+for.  Note this is different from gene index.</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="evolution.Individual.copy">
+<tt class="descname">copy</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/evolution.html#Individual.copy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#evolution.Individual.copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a copy of the individual.  Note that individuals are shallow
+copied except for their list of genes.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="evolution.Individual.determine_active_nodes">
+<tt class="descname">determine_active_nodes</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/evolution.html#Individual.determine_active_nodes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#evolution.Individual.determine_active_nodes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determines which nodes are currently active and sets self.active
+to the sorted list of active genes.  Automatically called by gene
+manipulating member functions.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="evolution.Individual.evaluate">
+<tt class="descname">evaluate</tt><big>(</big><em>inputs</em><big>)</big><a class="reference internal" href="_modules/evolution.html#Individual.evaluate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#evolution.Individual.evaluate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a list of inputs, return a list of outputs from executing
+this individual.</p>
+<p>Parameters:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">inputs</span></tt>: The list of input values for the individual to process.</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="evolution.Individual.mutate">
+<tt class="descname">mutate</tt><big>(</big><em>mutation_rate</em><big>)</big><a class="reference internal" href="_modules/evolution.html#Individual.mutate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#evolution.Individual.mutate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a mutated version of this individual using the specified
+mutation rate.</p>
+<p>Parameters:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">mutation_rate</span></tt>: The probability that a specific gene will mutate.</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="evolution.Individual.one_active_mutation">
+<tt class="descname">one_active_mutation</tt><big>(</big><em>_</em><big>)</big><a class="reference internal" href="_modules/evolution.html#Individual.one_active_mutation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#evolution.Individual.one_active_mutation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a mutated version of this individual using the <tt class="docutils literal"><span class="pre">Single</span></tt>
+mutation method.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="evolution.Individual.random_gene">
+<tt class="descname">random_gene</tt><big>(</big><em>index</em>, <em>invalid=None</em><big>)</big><a class="reference internal" href="_modules/evolution.html#Individual.random_gene"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#evolution.Individual.random_gene" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determines a random gene value given a gene index.  If optional
+<tt class="docutils literal"><span class="pre">invalid</span></tt> option is used, the returned value will only be <tt class="docutils literal"><span class="pre">invalid</span></tt>
+if the gene has no other valid values.</p>
+<p>Parameters:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">index</span></tt>: The gene index who&#8217;s value is being set.</li>
+<li><tt class="docutils literal"><span class="pre">invalid</span></tt>: Value to avoid returning if possible</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="evolution.Individual.show_active">
+<tt class="descname">show_active</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/evolution.html#Individual.show_active"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#evolution.Individual.show_active" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints the active portions of the individual in a somewhat readable
+way.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="evolution.generate">
+<tt class="descclassname">evolution.</tt><tt class="descname">generate</tt><big>(</big><em>config</em>, <em>output</em><big>)</big><a class="reference internal" href="_modules/evolution.html#generate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#evolution.generate" title="Permalink to this definition">¶</a></dt>
+<dd><p>An <tt class="docutils literal"><span class="pre">Individual</span></tt> generator that will yield a never ending supply of
+<tt class="docutils literal"><span class="pre">Individual</span></tt> objects that need to have their fitness set before the
+next <tt class="docutils literal"><span class="pre">Individual</span></tt> can be yielded.</p>
+<p>Parameters:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">config</span></tt>: A dictionary containing all configuration information
+required to generate initial individuals.  Should include values
+for:<ul>
+<li>All configuration information required to initialize an Individual.</li>
+<li><tt class="docutils literal"><span class="pre">mutation_rate</span></tt>: The probably to use for mutation.</li>
+<li><tt class="docutils literal"><span class="pre">off_size</span></tt>: The number of offspring to produce per generation.</li>
+<li><tt class="docutils literal"><span class="pre">output_length</span></tt>: The number of output variables.</li>
+<li><tt class="docutils literal"><span class="pre">max_arity</span></tt>: The maximum arity used by any function.</li>
+<li><tt class="docutils literal"><span class="pre">speed</span></tt>: String specifying the way to handle duplicate
+individual creation, either <tt class="docutils literal"><span class="pre">normal'',</span> <span class="pre">``skip'',</span> <span class="pre">``accumulate</span></tt>, or
+<tt class="docutils literal"><span class="pre">single</span></tt>.</li>
+</ul>
+</li>
+<li><tt class="docutils literal"><span class="pre">output</span></tt>: Dictionary used to return information about evolution, will
+send out:<ul>
+<li><tt class="docutils literal"><span class="pre">skipped</span></tt>: The number of individuals skipped by <tt class="docutils literal"><span class="pre">Skip</span></tt>.</li>
+<li><tt class="docutils literal"><span class="pre">estimated</span></tt>: The estimated number of individuals that are skippable.</li>
+</ul>
+</li>
+</ul>
+</dd></dl>
+
+</div>
+<div class="section" id="module-problems">
+<span id="problems"></span><h1><a class="reference internal" href="#module-problems" title="problems"><tt class="xref py py-mod docutils literal"><span class="pre">problems</span></tt></a><a class="headerlink" href="#module-problems" title="Permalink to this headline">¶</a></h1>
+<p>Defines each of the benchmark problems used as well as the function sets
+for those problems.</p>
+<dl class="class">
+<dt id="problems.Problem">
+<em class="property">class </em><tt class="descclassname">problems.</tt><tt class="descname">Problem</tt><big>(</big><em>problem_function</em>, <em>config</em><big>)</big><a class="reference internal" href="_modules/problems.html#Problem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#problems.Problem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Object used to store training input values and expected output values
+which are used in evaluating individuals.</p>
+<dl class="method">
+<dt id="problems.Problem.get_fitness">
+<tt class="descname">get_fitness</tt><big>(</big><em>individual</em><big>)</big><a class="reference internal" href="_modules/problems.html#Problem.get_fitness"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#problems.Problem.get_fitness" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the fitness of an individual as applied to this problem.</p>
+<p>Parameters:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">individual</span></tt>: The individual to be evaluated.</li>
+</ul>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="problems.binary_decode">
+<tt class="descclassname">problems.</tt><tt class="descname">binary_decode</tt><big>(</big><em>inputs</em><big>)</big><a class="reference internal" href="_modules/problems.html#binary_decode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#problems.binary_decode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a 1 on the output line specified by the binary input index</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="problems.binary_encode">
+<tt class="descclassname">problems.</tt><tt class="descname">binary_encode</tt><big>(</big><em>inputs</em><big>)</big><a class="reference internal" href="_modules/problems.html#binary_encode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#problems.binary_encode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the binary encoding of which input line contains a one.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="problems.binary_multiply">
+<tt class="descclassname">problems.</tt><tt class="descname">binary_multiply</tt><big>(</big><em>inputs</em><big>)</big><a class="reference internal" href="_modules/problems.html#binary_multiply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#problems.binary_multiply" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the result of performing a binary multiplication of the first half
+of the inputs with the second half.  Will always have the same number of
+output bits as input bits.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="problems.binary_range">
+<tt class="descclassname">problems.</tt><tt class="descname">binary_range</tt><big>(</big><em>config</em><big>)</big><a class="reference internal" href="_modules/problems.html#binary_range"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#problems.binary_range" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a dictionary specifying the <tt class="docutils literal"><span class="pre">input_length</span></tt>, returns all binary
+values of that length.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="problems.even_parity">
+<tt class="descclassname">problems.</tt><tt class="descname">even_parity</tt><big>(</big><em>inputs</em><big>)</big><a class="reference internal" href="_modules/problems.html#even_parity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#problems.even_parity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the even parity of a list of boolean values.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="problems.nand">
+<tt class="descclassname">problems.</tt><tt class="descname">nand</tt><big>(</big><em>x</em>, <em>y</em><big>)</big><a class="reference internal" href="_modules/problems.html#nand"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#problems.nand" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simple Nand function for inclusion in function sets.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="problems.nor">
+<tt class="descclassname">problems.</tt><tt class="descname">nor</tt><big>(</big><em>x</em>, <em>y</em><big>)</big><a class="reference internal" href="_modules/problems.html#nor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#problems.nor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simple Nor function for inclusion in function sets.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="problems.problem_attributes">
+<tt class="descclassname">problems.</tt><tt class="descname">problem_attributes</tt><big>(</big><em>range_method</em>, <em>operators</em>, <em>max_arity</em><big>)</big><a class="reference internal" href="_modules/problems.html#problem_attributes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#problems.problem_attributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator that adds attributes to problem functions.</p>
+<p>Parameters</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">range_method</span></tt>: The function used to generate training input values.</li>
+<li><tt class="docutils literal"><span class="pre">operators</span></tt>: The list of valid operators on this problem.</li>
+<li><tt class="docutils literal"><span class="pre">max_arity</span></tt>: The maximum arity of all operators.</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="problems.single_bit_set">
+<tt class="descclassname">problems.</tt><tt class="descname">single_bit_set</tt><big>(</big><em>config</em><big>)</big><a class="reference internal" href="_modules/problems.html#single_bit_set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#problems.single_bit_set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the list of all possible binary strings of specified length
+with exactly one set bit.  <tt class="docutils literal"><span class="pre">config</span></tt> should specify the <tt class="docutils literal"><span class="pre">input_length</span></tt>.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-plotter">
+<span id="plotter"></span><h1><a class="reference internal" href="#module-plotter" title="plotter"><tt class="xref py py-mod docutils literal"><span class="pre">plotter</span></tt></a><a class="headerlink" href="#module-plotter" title="Permalink to this headline">¶</a></h1>
+<p>Takes file names from the output/ folder and parses the information into
+readable values and produces a graph.  Use this module as an executable to
+process all information for a single problem, such as:</p>
+<p>python plotter.py output/multiply*</p>
+<p>Do not mix problems in a single run.  The graph will be saved to a .eps file
+named after the problem used.</p>
+<p>NOTE: You CANNOT use pypy for this as pylab is current unsupported.  Use
+python 2.7 instead.</p>
+</div>
+<div class="section" id="module-wasteplot">
+<span id="wasteplot"></span><h1><a class="reference internal" href="#module-wasteplot" title="wasteplot"><tt class="xref py py-mod docutils literal"><span class="pre">wasteplot</span></tt></a><a class="headerlink" href="#module-wasteplot" title="Permalink to this headline">¶</a></h1>
+<p>Creates the plot of the predicted amount of waste for different mutation
+rates and different numbers of active genes.  To make the plot use:</p>
+<p>python wasteplot.py</p>
+<p>The graph will be saved to Probability.eps</p>
+<p>NOTE: You CANNOT use pypy for this as pylab is current unsupported.  Use
+python 2.7 instead.</p>
+</div>
+<div class="section" id="module-util">
+<span id="util"></span><h1><a class="reference internal" href="#module-util" title="util"><tt class="xref py py-mod docutils literal"><span class="pre">util</span></tt></a><a class="headerlink" href="#module-util" title="Permalink to this headline">¶</a></h1>
+<p>Collection of utility functions with no other obvious home.</p>
+<dl class="function">
+<dt id="util.diff_count">
+<tt class="descclassname">util.</tt><tt class="descname">diff_count</tt><big>(</big><em>data1</em>, <em>data2</em><big>)</big><a class="reference internal" href="_modules/util.html#diff_count"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#util.diff_count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Count the number of differences is two sets of data</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="util.find_median">
+<tt class="descclassname">util.</tt><tt class="descname">find_median</tt><big>(</big><em>data</em><big>)</big><a class="reference internal" href="_modules/util.html#find_median"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#util.find_median" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the median of the data.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="util.load_configurations">
+<tt class="descclassname">util.</tt><tt class="descname">load_configurations</tt><big>(</big><em>filenames</em>, <em>file_method=&lt;built-in function open&gt;</em><big>)</big><a class="reference internal" href="_modules/util.html#load_configurations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#util.load_configurations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a list of files containing json encoded dictionaries, combined
+the data into a single dictionary.</p>
+<p>Parameters:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">filenames</span></tt>: The list of files paths.</li>
+<li><tt class="docutils literal"><span class="pre">file_method</span></tt>: The method to open the file with.  Defaults to <tt class="docutils literal"><span class="pre">open</span></tt>.
+Can be used to read compressed configurations.</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="util.median_deviation">
+<tt class="descclassname">util.</tt><tt class="descname">median_deviation</tt><big>(</big><em>data</em>, <em>median=None</em><big>)</big><a class="reference internal" href="_modules/util.html#median_deviation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#util.median_deviation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the median and the median absolute deviation of the data.</p>
+<p>Parameters:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">data</span></tt>: The data to find the medians of.</li>
+<li><tt class="docutils literal"><span class="pre">median</span></tt>: If the median is already known you can pass it in to save
+time.</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="util.save_configuration">
+<tt class="descclassname">util.</tt><tt class="descname">save_configuration</tt><big>(</big><em>filename</em>, <em>data</em>, <em>file_method=&lt;built-in function open&gt;</em><big>)</big><a class="reference internal" href="_modules/util.html#save_configuration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#util.save_configuration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write a dictionary to the specified file in json format.</p>
+<p>Parameters</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">filename</span></tt>: The path to write to.</li>
+<li><tt class="docutils literal"><span class="pre">data</span></tt>: The data to be written.</li>
+<li><tt class="docutils literal"><span class="pre">file_method</span></tt>: The method to open the file with.  Defaults to <tt class="docutils literal"><span class="pre">open</span></tt>.
+Can be used to write compressed configurations.</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="util.save_list">
+<tt class="descclassname">util.</tt><tt class="descname">save_list</tt><big>(</big><em>filename</em>, <em>data</em>, <em>file_method=&lt;built-in function open&gt;</em><big>)</big><a class="reference internal" href="_modules/util.html#save_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#util.save_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write a list of dictionaries to the file in a more human readable way.</p>
+<p>Parameters</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">filename</span></tt>: The path to write to.</li>
+<li><tt class="docutils literal"><span class="pre">data</span></tt>: The list of dictionaries to be written.</li>
+<li><tt class="docutils literal"><span class="pre">file_method</span></tt>: The method to open the file with.  Defaults to <tt class="docutils literal"><span class="pre">open</span></tt>.
+Can be used to write compressed configurations.</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="util.wilcoxon_signed_rank">
+<tt class="descclassname">util.</tt><tt class="descname">wilcoxon_signed_rank</tt><big>(</big><em>d1</em>, <em>d2</em><big>)</big><a class="reference internal" href="_modules/util.html#wilcoxon_signed_rank"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#util.wilcoxon_signed_rank" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform a statistical test paired data given in two data sets.  Returns
+W, the number of non-identical pairs, the standard deviation of the
+rankings, and finally the z value (which is only correct if the data
+contains more than 10 non identical pairs).</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><tt class="docutils literal"><span class="pre">main</span></tt></a></li>
+<li><a class="reference internal" href="#module-evolution"><tt class="docutils literal"><span class="pre">evolution</span></tt></a></li>
+<li><a class="reference internal" href="#module-problems"><tt class="docutils literal"><span class="pre">problems</span></tt></a></li>
+<li><a class="reference internal" href="#module-plotter"><tt class="docutils literal"><span class="pre">plotter</span></tt></a></li>
+<li><a class="reference internal" href="#module-wasteplot"><tt class="docutils literal"><span class="pre">wasteplot</span></tt></a></li>
+<li><a class="reference internal" href="#module-util"><tt class="docutils literal"><span class="pre">util</span></tt></a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Reducing Wasted Evaluations in Cartesian Genetic Programming</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/code.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Reducing Wasted Evaluations in Cartesian Genetic Programming"
+             >previous</a> |</li>
+        <li><a href="index.html">Reducing Wasted Evaluations in Cartesian Genetic Programming 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Brian W. Goldman.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

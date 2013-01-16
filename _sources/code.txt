@@ -1,50 +1,47 @@
-cgp Package
-============
-
-:mod:`evolution` Module
+:mod:`main`
 -------------------------
 
-.. automodule:: cgp.evolution
+.. automodule:: main
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`main` Module
+:mod:`evolution`
 -------------------------
 
-.. automodule:: cgp.main
+.. automodule:: evolution
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`plotter` Module
+:mod:`problems`
 -------------------------
 
-.. automodule:: cgp.plotter
+.. automodule:: problems
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`problems` Module
+:mod:`plotter`
 -------------------------
 
-.. automodule:: cgp.problems
+.. automodule:: plotter
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`util` Module
+:mod:`wasteplot`
 -------------------------
 
-.. automodule:: cgp.util
+.. automodule:: wasteplot
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`wasteplot` Module
+:mod:`util`
 -------------------------
 
-.. automodule:: cgp.wasteplot
+.. automodule:: util
     :members:
     :undoc-members:
     :show-inheritance:
